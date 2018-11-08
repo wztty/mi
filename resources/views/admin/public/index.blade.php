@@ -129,21 +129,21 @@
        <ul class="closed"> 
         <li><a href="">会员列表</a></li> 
        </ul> </li> 
-       <li> <a href="#"><i class="icon-user"></i> 权限管理</a> 
+       <li> <a href="#"><i class="icon-tags"></i></i> 权限管理</a>
        <ul class="closed"> 
         <li><a href="">选择权限</a></li> 
        </ul> </li> 
       <li> <a href="#"><i class="icon-th-list"></i> 分类管理</a> 
        <ul class="closed"> 
-        <li><a href="">分类添加</a></li> 
-        <li><a href="">分类列表</a></li> 
+        <li><a href="{{url('/admin/cates/create')}}">分类添加</a></li> 
+        <li><a href="{{url('/admin/cates')}}">分类列表</a></li> 
        </ul> </li> 
-      <li> <a href="#"><i class="icon-file"></i> 品牌管理</a> 
+      <li> <a href="#"><i class="icon-android"></i></i> 品牌管理</a> 
        <ul class="closed"> 
         <li><a href="">品牌添加</a></li> 
         <li><a href="">品牌列表</a></li> 
        </ul> </li> 
-      <li> <a href="#"><i class="icon-file"></i> 商品管理</a> 
+      <li> <a href="#"><i class="icon-shopping-cart"></i></i> 商品管理</a> 
        <ul class="closed"> 
         <li><a href="">商品添加</a></li> 
         <li><a href="">商品列表</a></li> 
@@ -152,12 +152,12 @@
        <ul class="closed"> 
         <li><a href="">订单列表</a></li> 
        </ul> </li>  
-       <li> <a href="#"><i class="icon-file"></i> 友情链接</a> 
+       <li> <a href="#"><i class="icon-arrow-down-3"></i></i> 友情链接</a> 
        <ul class="closed"> 
         <li><a href="">友情链接添加</a></li> 
         <li><a href="">友情链接列表</a></li> 
        </ul> </li> 
-       <li> <a href="#"><i class="icon-file"></i> 公告管理</a> 
+       <li> <a href="#"><i class="icon-pacman"></i></i> 公告管理</a> 
        <ul class="closed"> 
         <li><a href="">公告添加</a></li> 
         <li><a href="">公告列表</a></li> 
@@ -175,16 +175,37 @@
      </ul> 
     </div> 
    </div> 
-   <!-- Main Container Start --> 
-   <div id="mws-container" class="clearfix"> 
-    <div class="container"> 
-     @section('content')
 
-     @show
-      </div> 
-     </div> 
+
+   <!-- Main Container Start --> 
+      <div id="mws-container" class="clearfix"> 
+      @if (count($errors) > 0)
+      <div class="mws-form-message warning">
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+        </div>
+        @endif
+      @if(session('success'))
+      <div class="mws-form-message success">
+        {{session('success')}}
+      </div>
+      @endif
+      @if(session('error'))
+      <div class="mws-form-message error">
+          {{session('error')}}
+      </div>
+      @endif 
+      @section('content') 
+      
+      @show
      <!-- Panels End --> 
     </div> 
+
     <!-- footer --> 
     <div id="mws-footer">
       Copyright Your Website 2012. All Rights Reserved. 
