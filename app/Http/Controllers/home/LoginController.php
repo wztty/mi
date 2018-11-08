@@ -34,11 +34,11 @@ class LoginController extends Controller
         $_code=$code->get();
 
         $Vcode=$request->input('code');
-        //dd($code);
-        
-        if($Vcode!=$_code){
+
+        if(strtoupper($Vcode)!=$_code){
             return back()->with('error','输入的验证码有误');        
         }
+
         //获取登陆用户名和密码
 
         $name=$request->input("username");
@@ -53,7 +53,9 @@ class LoginController extends Controller
             if(Hash::check($password,$info->password)){
                 //存储在session里
                 session(['username'=>$name]);
-                return redirect("home/index")->with('success','登陆成功');
+                return redirect("/")->with('success','登陆成功');
+
+                session(['username'=>$name]);
                
 
             }else{
@@ -64,6 +66,8 @@ class LoginController extends Controller
         }
 
     }
+
+    
     //引入注册页面
     public function register(Request $request)
     {

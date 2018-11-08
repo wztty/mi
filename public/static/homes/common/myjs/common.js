@@ -14,7 +14,7 @@ $(function(){
     }($);
    
 
-    网站导航鼠标划过显示
+    //网站导航鼠标划过显示
     ~function($){
        //获取导航
         var j_menu = $('#J_navMenu');
@@ -105,8 +105,8 @@ $(function(){
         // }
     }($);
     
-    // 分类导航
-    ~function($,cate){
+    //分类导航
+   
         $('#J_categoryList').find('.category-item').on({
             mouseenter: function(){
                 $(this).addClass('category-item-active');
@@ -115,7 +115,7 @@ $(function(){
                 $(this).removeClass('category-item-active');
             }
         });
-        console.log($('#J_navCategory').find('.link-category').css('visibility'));
+        //console.log($('#J_navCategory').find('.link-category').css('visibility'));
         //分类导航划过显示
         $('#J_navCategory').on({
             mouseenter:function(){
@@ -133,7 +133,7 @@ $(function(){
             }
         })
 
-    }($,cate);
+   
 
     //点击播放视频
     ~function($){
@@ -156,7 +156,7 @@ $(function(){
         })
     }($);
 
-    // 生成网站主导航
+    //生成网站主导航
     ~function($){
         //处理导航数据
         function dealNavData(navData){

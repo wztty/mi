@@ -32,3 +32,5 @@ Route::resource("/","home\IndexController");
 Route::any('/login','home\LoginController@login');
 //处理前台登陆
 Route::any('/dologin','home\LoginController@store');
+//前台退出登陆
+Route::get('/user/logout','home\LoginController@loginout');

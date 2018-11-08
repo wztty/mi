@@ -10,7 +10,6 @@
     @section('css')
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/static/homes/common/css/base.min.css" />
-
     @show
     @section('myCss')
     @show
@@ -34,7 +33,7 @@
                     {{--</div>--}}
                 {{--</div>--}}
             </div>
-             <?php if(!session('uid')){?>
+             <?php if(!session('username')){?>
             <div class="topbar-info" id="J_userInfo">
                 <a  rel="nofollow" class="link" href="/login" data-needlogin="true">登录</a>
                 <span class="sep">|</span>
@@ -43,7 +42,7 @@
             <?php 
                 }else{ 
 
-                    $user = \App\Http\Controllers\Home\UserController::gainUsername();
+                    $user = \App\Http\Controllers\home\UserController::gainUsername();
             ?>
             <div class="topbar-info" id="J_userInfo">
                 <span class="user">

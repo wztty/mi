@@ -3,6 +3,8 @@
 <link rel="stylesheet" href="/static/homes/common/css/index.min.css" />
 @show
 @section('content')
+
+
        <!--  轮播图 -->
     <div class="home-hero-container container">
         <div class="home-hero">
