@@ -1,15 +1,9 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!-->
 <html lang="en">
- <!--<![endif]-->
  <head> 
   <meta charset="utf-8" /> 
-  <!-- Viewport Metatag --> 
   <meta name="viewport" content="width=device-width,initial-scale=1.0" /> 
-  <!-- Plugin Stylesheets first to ease overrides --> 
+  <!-- Plugin Stylesheets firs to ease overrides --> 
   <link rel="stylesheet" type="text/css" href="/static/admin/b/plugins/colorpicker/colorpicker.css" media="screen" /> 
   <link rel="stylesheet" type="text/css" href="/static/admin/b/custom-plugins/wizard/wizard.css" media="screen" /> 
   <!-- Required Stylesheets --> 
@@ -129,42 +123,36 @@
        <ul class="closed"> 
         <li><a href="">会员列表</a></li> 
        </ul> </li> 
-       <li> <a href="#"><i class="icon-tags"></i></i> 权限管理</a>
-       <ul class="closed"> 
-        <li><a href="">选择权限</a></li> 
-       </ul> </li> 
       <li> <a href="#"><i class="icon-th-list"></i> 分类管理</a> 
        <ul class="closed"> 
         <li><a href="{{url('/admin/cates/create')}}">分类添加</a></li> 
         <li><a href="{{url('/admin/cates')}}">分类列表</a></li> 
        </ul> </li> 
-      <li> <a href="#"><i class="icon-android"></i></i> 品牌管理</a> 
-       <ul class="closed"> 
-        <li><a href="">品牌添加</a></li> 
-        <li><a href="">品牌列表</a></li> 
-       </ul> </li> 
       <li> <a href="#"><i class="icon-shopping-cart"></i></i> 商品管理</a> 
        <ul class="closed"> 
-        <li><a href="">商品添加</a></li> 
-        <li><a href="">商品列表</a></li> 
+        <li><a href="/admingoods/create">商品添加</a></li> 
+        <li><a href="/admingoods">商品列表</a></li>
+        <li><a href="/adminsku">sku列表</a></li>  
        </ul> </li> 
+
+       <li> <a href="#"><i class="icon-pacman"></i></i>评价管理</a> 
+       <ul class="closed"> 
+        <li><a href="">评价查看</a></li> 
+        <li><a href="">评价回复</a></li> 
+       </ul> </li>
+
         <li> <a href="#"><i class="icon-th-list"></i> 订单管理</a> 
        <ul class="closed"> 
         <li><a href="">订单列表</a></li> 
        </ul> </li>  
+
        <li> <a href="#"><i class="icon-arrow-down-3"></i></i> 友情链接</a> 
        <ul class="closed"> 
-        <li><a href="">友情链接添加</a></li> 
-        <li><a href="">友情链接列表</a></li> 
+        <li><a href="/flink">友情链接列表</a></li> 
        </ul> </li> 
-       <li> <a href="#"><i class="icon-pacman"></i></i> 公告管理</a> 
-       <ul class="closed"> 
-        <li><a href="">公告添加</a></li> 
-        <li><a href="">公告列表</a></li> 
-       </ul> </li>
+       
         <li> <a href="#"><i class="icon-file"></i> 广告管理</a> 
        <ul class="closed"> 
-        <li><a href="">广告添加</a></li> 
         <li><a href="">广告列表</a></li> 
        </ul> </li> 
         <li> <a href="#"><i class="icon-file"></i> 轮播图管理</a> 

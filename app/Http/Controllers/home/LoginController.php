@@ -13,6 +13,8 @@ use Hash;
 use App\Http\Requests\UserInsert;
 //导入要调用的模型类
 use App\Models\Users;
+//导入验证类
+use App\Http\Requests\Registerinsert;
 class LoginController extends Controller
 {
     //引入登陆界面
@@ -67,7 +69,16 @@ class LoginController extends Controller
 
     }
 
-    
+    //前台登陆退出
+    public function loginout(Request $request)
+    {
+        //删除ssesion
+       Session()->flush();
+       return redirect('/');
+        
+    }
+
+
     //引入注册页面
     public function register(Request $request)
     {

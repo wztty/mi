@@ -176,9 +176,9 @@
                         </a>
                     </li>
                     <li>
-                        <a rel="nofollow" href="/" target="_blank">
+                        <a rel="nofollow" href="/looklinks" target="_blank">
                             <i class="iconfont">&#xe636;</i>
-                            15天免费换货
+                            友情链接
                         </a>
                     </li>
                     <li>

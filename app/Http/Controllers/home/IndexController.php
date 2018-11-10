@@ -94,5 +94,34 @@ class IndexController extends Controller
         return $data2;
     }
 
-  
+          //友情链接
+          public function links()
+          {
+                $datas=DB::table('links')->where('status','=',1)->get();
+
+                return view('home.link',['datas'=>$datas]);
+          }
+
+
+          public function insertlink(Request $request)
+          {
+                $title=$request->input('title');
+                $url=$request->input('url');
+                if(!($title||$url)){
+                      return back()->with('error','输入不能为空');
+                }
+
+                $data=$request->except('_token');
+
+                $datas=DB::table('links')->where('status','=',1)->insert($data);
+
+                if($datas){
+
+                   return redirect('looklinks')->with('success','正在申请，请耐心等待。');
+                }else{
+                    return redirect('looklinks')->with('error','系统繁忙');
+                }
+
+                
+          }
 }

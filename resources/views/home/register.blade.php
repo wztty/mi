@@ -8,19 +8,19 @@
     <meta name="Description" content="" />
     <title>小米官网</title>
 
-    <link href="/static/home/common/css/login.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="/static/home/common/js/common.js"></script>
-    <script type="text/javascript" src="/static/home/common/js/user.js"></script>
+    <link href="/static/homes/common/css/login.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/static/homes/common/js/common.js"></script>
+    <script type="text/javascript" src="/static/homes/common/js/user.js"></script>
     <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
 </head>
 <body>
 
-<script type="text/javascript" src="/static/home/common/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="/static/home/common/js/jquery.json.js"></script>
-<script type="text/javascript" src="/static/home/common/js/transport_jquery.js"></script>
-<script type="text/javascript" src="/static/home/common/js/utils.js"></script>
-<script type="text/javascript" src="/static/home/common/js/jquery.SuperSlide.js"></script>
-<script type="text/javascript" src="/static/home/common/js/xiaomi_common.js"></script>
+<script type="text/javascript" src="/static/homes/common/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/static/homes/common/js/jquery.json.js"></script>
+<script type="text/javascript" src="/static/homes/common/js/transport_jquery.js"></script>
+<script type="text/javascript" src="/static/homes/common/js/utils.js"></script>
+<script type="text/javascript" src="/static/homes/common/js/jquery.SuperSlide.js"></script>
+<script type="text/javascript" src="/static/homes/common/js/xiaomi_common.js"></script>
 <script>
     $(function(){
 
@@ -76,7 +76,7 @@
 <div class="register_wrap">
     <div class="bugfix_ie6 dis_none">
         <div class="n-logo-area clearfix">
-            <a href="/" class="fl-l" style="margin-left: 450px"><img src="/static/home/common/image/logo.gif" width="55" /></a>
+            <a href="/" class="fl-l" style="margin-left: 450px"><img src="/static/homes/common/image/logo.gif" width="55" /></a>
         </div>
     </div>
     <div id="main">
@@ -85,7 +85,7 @@
                 <h4 class="title-big">注册小米官网</h4>
             </div>
             <div class="regbox" id="register_box">
-                <form action="/home/create" method="post" name="formUser" onsubmit="return submitPwdInfo();">
+                <form action="/homes/create" method="post" name="formUser" onsubmit="return submitPwdInfo();">
                     <input type="hidden" value="C4E1AB9A7DE79D7C750E8916875E7DBE" id="validate" />
                     <div class="phone_step1">
                         <style type="text/css">
@@ -169,7 +169,7 @@
                         </div>
                         <div class="trig">
                             已有账号?
-                            <a href="/home/login" class="trigger-box">点击登录</a>
+                            <a href="/homes/login" class="trigger-box">点击登录</a>
                         </div>
                     </div>
                 </form>
