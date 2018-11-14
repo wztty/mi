@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use App\Models\Addshop;
+use Config;
 
 class GoodsController extends Controller
 {
@@ -24,7 +26,7 @@ class GoodsController extends Controller
     {
          //商品列表 admingoods访问
         //查询商品
-        $goods=DB::table('goods')->paginate(10);
+        $goods=DB::table('goods')->paginate(5);
         //dd($goods);
        return view('admin.goods.index',['goods'=>$goods,'request'=>$request->all()]);
     }
@@ -33,7 +35,7 @@ class GoodsController extends Controller
     //sku表
     public function sku(Request $request)
     {
-        $skus=DB::table('skus')->paginate(10);
+        $skus=DB::table('skus')->paginate(5);
 
          return view('admin.goods.skus',['skus'=>$skus,'request'=>$request->all()]);
 
@@ -61,6 +63,29 @@ class GoodsController extends Controller
      */
     public function store(Request $request)
     {
+        //商品添加
+       
+        $data=$request->except('_token');
+        
+        $data=$request->only(['title','cate_id','price','content','img','showimg','status']); 
+        // dd($data);
+        $data['sub_title']='';
+        if($request->hasFile("img")){
+            //初始化名字获取后缀
+            $name=time()+rand(1,10000);
+            $ext=$request->file("img")->getClientOriginalExtension();
+            //移动到置顶目录下
+            $request->file("img")->move(Config::get('app.uploads'),$name.".".$ext);
+            //初始化$data
+            $data['img']=trim(Config::get('app.uploads').'/'.$name.".".$ext,'.');
+            // dd($data);
+            //执行数据库的插入
+            
+            if(DB::table("goods")->insert($data)){
+                return redirect("/admingoods")->with('suceess','添加成功');
+            }
+        }
+
         //admingoods访问
         //接受所有提交的数据
         if(empty($request->input('title')&&$request->input('price')))
@@ -70,8 +95,8 @@ class GoodsController extends Controller
 
         $data=$request->all();
         // dd($data);
-        $showimg=$data['showImg']->path.$data['showImg']->originalName;
-        echo $showImg;
+        $showimg=$data['showimg']->path.$data['showimg']->originalName;
+        echo $showimg;
 
     }
 
@@ -81,9 +106,12 @@ class GoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //admingoods/$id访问
+        
+       
+
+
     }
 
     /**
@@ -94,7 +122,11 @@ class GoodsController extends Controller
      */
     public function edit($id)
     {
-        //admingoods/$id/edit访问
+         $cates=DB::table('cates')->get();
+
+        $goods=DB::table("goods")->where("id","=",$id)->first();
+          // dd($goods);
+        return view("admin.goods.update",['goods'=>$goods,'cates'=>$cates]);
     }
 
     /**
@@ -106,7 +138,37 @@ class GoodsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //获取参数
+        // $data=$request->all();
+        // dd($data);
+        $data=$request->only(['title','price','content','img','showimg','status']);
+        $data['sub_title']='';
+        //获取需要修改的数据
+        $info=DB::table("goods")->where("id","=",$id)->first();
+        //如果有新图片上传
+      
+        if($request->hasFile("img")){
+            //初始化名字 获取后缀
+            $name=time()+rand(1,10000);
+            $ext=$request->file("img")->getClientOriginalExtension();
+            //移动到指定的目录下
+            $request->file("img")->move(Config::get('app.uploads'),$name.".".$ext);
+            //初始化$data
+            $data['img']=trim(Config::get('app.uploads').'/'.$name.".".$ext,'.');
+            // dd($data);
+            //执行数据库的修改
+            if(DB::table("goods")->where("id","=",$id)->update($data)){
+                //删除原图
+                unlink(".".$info->img);
+                
+                return redirect("/admingoods")->with('success','修改成功');
+            }
+        }else{
+            //没有图片修改
+             if(DB::table("goods")->where("id","=",$id)->update($data)){
+                return redirect("/admingoods")->with('success','修改成功');
+            }   
+        }
     }
 
     /**
@@ -118,5 +180,14 @@ class GoodsController extends Controller
     public function destroy($id)
     {
         //admingoods/$id访问
+        //获取需要删除的数据
+        
+        $info=DB::table("goods")->where("id","=",$id)->first();
+        //echo $info->pic;
+        if(DB::table("goods")->where("id","=",$id)->delete()){
+            //干掉图片
+            unlink(".".$info->img);
+            return redirect("/admingoods")->with('success','删除成功');
+        }
     }
 }

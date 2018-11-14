@@ -124,4 +124,15 @@ class IndexController extends Controller
 
                 
           }
+           //前台商品详情
+          public function detail(Request $request)
+          {
+            $id=$_GET['id'];
+           
+            // $datax=DB::table("goods")->join('skus','goods.cate_id','=','skus.good_id')->where("good_id","=",$id)->get();
+            $datax=DB::table("cates")->join('goods','cates.id','=','goods.cate_id')->join('skus','goods.cate_id','=','skus.good_id')->where("cate_id","=",$id)->get();
+
+              return view('home.detail',['datax'=>$datax]);
+              
+          }
 }

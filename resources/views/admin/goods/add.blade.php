@@ -8,12 +8,13 @@
             <span>添加商品</span>
         </div>
         <div class="mws-panel-body no-padding">
-            <form class="mws-form" action="{{url('/admingoods')}}" method="post" enctype="multipart/form-data">
+            <form class="mws-form" action="/admingoods" method="post" enctype="multipart/form-data">
                 <div class="mws-form-inline">
                     <div class="mws-form-row">
                         <label class="mws-form-label">商品名称</label>
                         <div class="mws-form-item">
                             <input type="text" class="small" title="" name="title" value="{{old('title')}}">
+                            <!-- <input type="hidden" name="sub_title" value=""> -->
                         </div>
                     </div>
                     <div class="mws-form-row" style="width: 490px;" >
@@ -25,13 +26,13 @@
                     <div class="mws-form-row" style="width: 490px;" >
                         <label class="mws-form-label">列表图片</label>
                         <div class="mws-form-item">
-                            <input type="file" class="small" title="" name="showImg">
+                            <input type="file" class="small" title="" name="showimg">
                         </div>
                     </div>
                     <div class="mws-form-row" style="width: 490px;" >
                         <label class="mws-form-label">商品主图</label>
                         <div class="mws-form-item">
-                            <input type="file" class="small" title="" name="img[]" multiple>
+                            <input type="file" class="small" title="" name="img" multiple>
                         </div>
                     </div>
 

@@ -1,39 +1,40 @@
 @extends('admin.index')
-@section('title',$title)
+@section('title','修改商品')
 @section('content')
     <div class="mws-panel grid_8">
         <div class="mws-panel-header">
             <span>修改商品</span>
         </div>
         <div class="mws-panel-body no-padding">
-            <form class="mws-form" action="{{url('/admin/good/update')}}" method="post" enctype="multipart/form-data">
+            <form class="mws-form" action="/admingoods/{{$goods->id}}" method="post" enctype="multipart/form-data">
                 <div class="mws-form-inline">
                     <div class="mws-form-row">
                         <label class="mws-form-label">商品名称</label>
                         <div class="mws-form-item">
-                            <input type="text" class="small" title="" name="title" value="{{$good['title']}}">
+
+                            <input type="text" class="small" title="" name="title" value="{{$goods->title}}">
                         </div>
                     </div>
                     <div class="mws-form-row" style="width: 490px;" >
                         <label class="mws-form-label">商品价格</label>
                         <div class="mws-form-item">
-                            <input type="text" class="small" title="" name="price" value="{{$good['price']}}">
+                            <input type="text" class="small" title="" name="price" value="{{$goods->price}}">
                         </div>
                     </div>
                     <div class="mws-form-row" style="width: 490px;" >
                         <div class="mws-form-item">
-                            <img src="{{$good['showImg']}}" alt="">
+                            <img src="{{$goods->showImg}}" alt="">
                         </div>
                     </div><div class="mws-form-row" style="width: 490px;" >
                         <label class="mws-form-label">列表图片</label>
                         <div class="mws-form-item">
-                            <input type="file" class="small" title="" name="showImg">
+                            <input type="file" class="small" title="" name="showimg">
                         </div>
                     </div>
                     <div class="mws-form-row" style="width: 490px;" >
                         <label class="mws-form-label">商品主图</label>
                         <div class="mws-form-item">
-                            <input type="file" class="small" title="" name="img[]" multiple>
+                            <input type="file" class="small" title="" name="img" multiple>
                         </div>
                     </div>
 
@@ -41,16 +42,14 @@
                         <label class="mws-form-label">商品分类</label>
                         <div class="mws-form-item">
                             <select class="small" title="" name="cate_id">
+                                    
                                 @foreach($cates as $cate)
-                                    @if($good->cate_id == $cate->id)
-                                        <option value="{{$cate->id}}" selected>{{$cate->name}}</option>
-                                    @else
-                                        <option value="{{$cate->id}}">{{$cate->name}}</option>
-                                    @endif
+                                    <option value="{{$cate->id}}">{{$cate->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
+                   
                     <div class="mws-form-row" style="width: 490px;" >
                         <label class="mws-form-label">状态</label>
                         <div class="mws-form-item">
@@ -69,7 +68,7 @@
                         <label class="mws-form-label">详情</label>
                         <div class="mws-form-item">
                             <!-- 加载编辑器的容器 -->
-                            <script id="editor" name="content" type="text/plain" style="width:650px;height:300px;">商品信息不能为空</script>
+                            <script id="editor" name="content" type="text/plain" style="width:650px;height:300px;">{!!$goods->content!!}</script>
                         </div>
                     </div>
                     <!-- 实例化编辑器 -->
@@ -84,7 +83,8 @@
                 </div>
                 <div class="mws-button-row">
                     {{csrf_field()}}
-                    <input type="hidden" name="id" value="{{$good['id']}}">
+                    {{ method_field('PUT') }}
+                    <input type="hidden" name="id" value="{{$goods->id}}">
                     <input type="submit" value="保存并添加sku" class="btn btn-warning">
                 </div>
             </form>

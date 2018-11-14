@@ -33,6 +33,10 @@ Route::group([],function(){
 
 	//后台商品模块
 	Route::resource('/admingoods',"admin\GoodsController");
+	//后台商品添加模块
+	Route::get('/admin/show',"admin\GoodsController@show");
+	
+
 	//后台skus模块
 	Route::get('/adminsku',"admin\GoodsController@sku");
 	//友情链接
@@ -51,9 +55,11 @@ Route::group([],function(){
 
 
 
-//前台首页
-Route::resource("/","home\IndexController"); 
 
+
+	//前台首页
+Route::resource("/","home\IndexController"); 
+Route::get('/detail',"home\IndexController@detail");
 //前台登陆
 Route::any('/login','home\LoginController@login');
 //处理前台登陆
