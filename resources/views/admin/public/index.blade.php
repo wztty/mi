@@ -21,7 +21,8 @@
   <!-- Theme Stylesheet --> 
   <link rel="stylesheet" type="text/css" href="/static/admin/b/css/mws-theme.css" media="screen" /> 
   <link rel="stylesheet" type="text/css" href="/static/admin/b/css/themer.css" media="screen" /> 
-  <link rel="stylesheet" type="text/css" href="/static/admin/b/css/my.css" media="screen" /> 
+  <link rel="stylesheet" type="text/css" href="/static/admin/b/css/my.css" media="screen" />
+  <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script> 
   <title>@yield('title')</title> 
  </head> 
  <body> 
@@ -85,12 +86,14 @@
      <!-- Username and Functions --> 
      <div id="mws-user-functions"> 
       <div id="mws-username">
-        Hello, John Doe 
+
+        Hello, {{session('username')}}
+  
       </div> 
       <ul> 
        <li><a href="#">Profile</a></li> 
        <li><a href="#">Change Password</a></li> 
-       <li><a href="index.html">Logout</a></li> 
+       <li><a href="/admin/exit">退出</a></li> 
       </ul> 
      </div> 
     </div> 
@@ -116,17 +119,19 @@
       <button type="submit" class="mws-search-submit"><i class="icon-search"></i></button> 
      </form> 
     </div> 
+
     <!-- Main Navigation --> 
     <div id="mws-navigation"> 
      <ul> 
-      <li> <a href="#"><i class="icon-user"></i> 用户管理</a> 
+      <li> <a href="#"><i class="icon-user"></i>用户/收货地址</a> 
        <ul class="closed"> 
-        <li><a href="">会员列表</a></li> 
+        <li><a href="/adminuser">会员列表</a></li>
+        <li><a href="/address">收货地址管理</a></li> 
        </ul> </li> 
       <li> <a href="#"><i class="icon-th-list"></i> 分类管理</a> 
        <ul class="closed"> 
-        <li><a href="{{url('/admin/cates/create')}}">分类添加</a></li> 
-        <li><a href="{{url('/admin/cates')}}">分类列表</a></li> 
+        <li><a href="{{url('/admincates/create')}}">分类添加</a></li> 
+        <li><a href="{{url('/admincates')}}">分类列表</a></li> 
        </ul> </li> 
       <li> <a href="#"><i class="icon-shopping-cart"></i></i> 商品管理</a> 
        <ul class="closed"> 
@@ -137,8 +142,7 @@
 
        <li> <a href="#"><i class="icon-pacman"></i></i>评价管理</a> 
        <ul class="closed"> 
-        <li><a href="">评价查看</a></li> 
-        <li><a href="">评价回复</a></li> 
+        <li><a href="/comments">评价查看</a></li> 
        </ul> </li>
 
         <li> <a href="#"><i class="icon-th-list"></i> 订单管理</a> 
@@ -163,6 +167,13 @@
      </ul> 
     </div> 
    </div> 
+
+   <!-- Main Container Start --> 
+   <div id="mws-container" class="clearfix"> 
+    <div class="container"> 
+    {{session('error')}}
+     @section('content')
+
 
 
    <!-- Main Container Start --> 

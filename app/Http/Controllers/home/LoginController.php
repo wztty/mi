@@ -14,7 +14,7 @@ use App\Http\Requests\UserInsert;
 //导入要调用的模型类
 use App\Models\Users;
 //导入验证类
-use App\Http\Requests\Registerinsert;
+use App\Http\Requests\StoreBlogPost;
 class LoginController extends Controller
 {
     //引入登陆界面
@@ -48,17 +48,17 @@ class LoginController extends Controller
         //要数据表的数据做对比
         //检测用户名
         $info=DB::table("users")->where("username",'=',$name)->first();
+
+        $uid=$info->id;
         //判断
         if($info){
             //检测密码
             //哈希数据值检测
             if(Hash::check($password,$info->password)){
                 //存储在session里
-                session(['username'=>$name]);
-                return redirect("/")->with('success','登陆成功');
+                session(['username'=>$name,'uid'=>$uid]);
 
-                session(['username'=>$name]);
-               
+                return redirect("/")->with('success','登陆成功');            
 
             }else{
                 return back()->with('error','密码有误');
@@ -84,21 +84,45 @@ class LoginController extends Controller
     {
         return view('home.register');
     }
+
+
+
     //注册方法
-    public function create(Request $request)
+    public function doregister(StoreBlogPost $request)
     {
-        $data=$request->except('_token','confirm_password','Submit','Vcode');
-        $data['status']=0;
-        $data['level']=0;
-        $data['pic']='/image/upload/user.png';
-        //密码处理
-        $data['password']=Hash::make($data['password']);
+        $_code=new \Code();
+        $Vcode=$_code->get();
       
-        if(Users::create($data)){
-            return redirect("home/login")->with('success','注册成功');
+       
+        $code=strtoupper($request->input('code'));
+        
+        if($code = $Vcode){
+
+            $data=$request->except('_token','repassword','Vcode');
+            $data['status']=0;
+            $data['level']=1;
+            $data['pic']='/static/image/007.jpg';
+            //密码处理
+            $data['password']=Hash::make($data['password']);
+          
+            // dd($data);
+            $bool=DB::table('users')->insert($data);
+
+            if($bool){
+
+                return redirect('/login')->with('success','注册成功，请登陆');
+
+            }else{
+                return redirect('/register')->with('error','注册失败，请重新注册');
+            }
+           
         }else{
-            return redirect("home/register")->with('error','添加失败');
+
+             //跳回注册
+            return back()->with('error','验证码错误');
         }
+
+        
     }
 }
 
