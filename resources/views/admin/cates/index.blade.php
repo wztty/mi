@@ -34,14 +34,13 @@
         <td class=" ">{{$val->name}}</td> 
 
         <td class=" ">
-          <form action="/admin/cates/{{$val->id}}" method="post">
+          <form action="/admincates/{{$val->id}}" method="post">
           {{csrf_field()}}
           {{method_field("DELETE")}}
           <button type="submit" class="btn btn-info">删除</button>
         </form>
         </td>
-
-        <td class=" "><a href="admin/create/{{$val->id}}/edit" class="btn btn-info">修改</a></td> 
+        <td class=" "><a href="/admincates/{{$val->id}}" class="btn btn-info">修改</a></td> 
        </tr>
      @endforeach
       </tbody>

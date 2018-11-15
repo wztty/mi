@@ -40,11 +40,13 @@
                    </tr>
                 @endforeach
                 </tbody>
+                <div class="dataTables_paginate paging_full_numbers" id="pages">
+                   {{$skus->appends($request)->render()}}
+                </div>
 
             </table>
-                <div class="dataTables_paginate paging_full_numbers" id="pages">
-              {{$skus->appends($request)->render()}}
-                </div>
+                
         </div>
+
     </div>
 @endsection

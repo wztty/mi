@@ -149,7 +149,7 @@
                         @foreach($star as $key=>$val)
                             @if($key<=20)
                         <li class="rainbow-item-{{$key}}">
-                            <a class="thumb" href="/datail?id={{$val->id}}"  target="_blank">
+                            <a class="thumb" href="/detail?id={{$val->id}}"  target="_blank">
                                 
                                 <img src="{{$val->showImg}}" srcset="{{$val->showImg}}" alt="{{$val->title}}" />
                             </a>

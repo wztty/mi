@@ -23,7 +23,7 @@
 
             </div>
             <div class="topbar-cart" id="J_miniCartTrigger">
-                <a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="/cart"> <i class="iconfont">&#xe60c;</i>
+                <a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="/cart/"> <i class="iconfont">&#xe60c;</i>
                     购物车
                     <span class="cart-mini-num J_cartNum"></span>
                 </a>
@@ -37,12 +37,12 @@
             <div class="topbar-info" id="J_userInfo">
                 <a  rel="nofollow" class="link" href="/login" data-needlogin="true">登录</a>
                 <span class="sep">|</span>
-                <a  rel="nofollow" class="link" href="/register" >注册</a>
+                <a  rel="nofollow" class="link" href="/login/register" >注册</a>
             </div>
             <?php 
                 }else{ 
 
-                    $user = \App\Http\Controllers\home\UserController::gainUsername();
+                    $user = \App\Http\Controllers\Home\UserController::gainUsername();
             ?>
             <div class="topbar-info" id="J_userInfo">
                 <span class="user">
@@ -52,7 +52,7 @@
                     <ul class="user-menu" style="display: none;">
 
                         <li>
-                            <a rel="nofollow" href="/usercomment" target="_blank">评价晒单</a>
+                            <a rel="nofollow" href="/user/comment" target="_blank">评价晒单</a>
                         </li>
                         <!-- <li>
                             <a rel="nofollow" href="http://order.mi.com/user/favorite" target="_blank">我的喜欢</a>
@@ -63,7 +63,7 @@
                     </ul>
                 </span>
                 <span class="sep">|</span>
-                <a rel="nofollow" class="link link-order" href="/userorder" target="_blank">我的订单</a>
+                <a rel="nofollow" class="link link-order" href="/user/order/" target="_blank">我的订单</a>
             </div>
             <?php } ?>
         </div>
@@ -80,65 +80,7 @@
                             <span class="text">全部商品分类</span>
                         </a>
                         <!-- 分类导航 start -->
-                        
-          <div class="site-category"> 
-           <ul id="J_categoryList" class="site-category-list clearfix">
-            <?php
-                    $cates = \App\Http\Controllers\home\IndexController::cate();
-            ?>
-         @foreach($cates as $key=>$val)
-  <li class="category-item"><a class="title" href="/list?id=1">{{$val->name}}<i class="iconfont"></i></a>
-   <div class="children clearfix children-col-2" style="width:530px;">
-    <ul class="children-list children-list-col children-col-1">
-        @foreach($val->suv as $keys=>$vals)
-        @if($keys<6)
-            <li class="star-goods"><a class="link" href="/detail?id={{$vals->id}}"><img class="thumb" src="{{url($vals->img)}}" width="40" height="40" alt="" /><span class="text">{{$vals->name}}</span></a></li>
-        @endif
-        @endforeach
-    </ul>
-    <ul class="children-list children-list-col children-col-1">
-     @foreach($val->suv as $keyss=>$valss)
-        @if($keyss>5)
-     <li class="star-goods"><a class="link" href="/detail?id={{$valss->id}}"><img class="thumb" src="{{url($valss->img)}}" width="40" height="40" alt="" /><span class="text">{{$valss->name}}</span></a></li>
-        @endif
-    @endforeach
-    </ul>
-   </div></li>
-       @endforeach
-          
-           </ul>
-          </div>
-
- 
-      <li class="nav-item"><a class="link" href="javascript:void(0);"><span class="text">小米手机</span><span class="arrow"></span></a>
-       <div class="item-children">
-        <div class="container">
-         <ul class="children-list clearfix">
-          <li class="first">
-           <div class="figure figure-thumb">
-            <a href="/detail?id=6"><img src="http://img10.hqbcdn.com/product/3c/4f/3c4fa94435b63e0efa9cb823012b0d6d.jpg" width="160" height="110" /></a>
-           </div>
-           <div class="title">
-            <a href="6">MI/小米 小米MAX 全网通4G 双卡双待 3G+32GB 白色</a>
-           </div><p class="price">1438.00</p></li>
-          <li class="first">
-           <div class="figure figure-thumb">
-            <a href="/detail?id=7"><img src="http://img6.hqbcdn.com/product/69/78/6978a00c2e54a0a338da6e6a0a830bba.jpg" width="160" height="110" /></a>
-           </div>
-           <div class="title">
-            <a href="7">MI/小米 红米 Note 3 全网通 手机 3GB＋32G高配版 金色</a>
-           </div><p class="price">1058.00</p></li>
-          <li class="first">
-           <div class="figure figure-thumb">
-            <a href="/detail?id=5"><img src="http://img12.hqbcdn.com/product/80/73/8073eb50615cbf1eed37bee63a13cfe6.jpg" width="160" height="110" /></a>
-           </div>
-           <div class="title">
-            <a href="5">MI/小米 小米5 全网通 标准版 黑色</a>
-           </div><p class="price">1968.00</p></li>
-         </ul>
-        </div>
-       </div></li>
-                </li>
+                    </li>
 
                 </ul>
             </div>
@@ -176,9 +118,9 @@
                         </a>
                     </li>
                     <li>
-                        <a rel="nofollow" href="/looklinks" target="_blank">
+                        <a rel="nofollow" href="/" target="_blank">
                             <i class="iconfont">&#xe636;</i>
-                            友情链接
+                            15天免费换货
                         </a>
                     </li>
                     <li>
@@ -197,7 +139,7 @@
             </div>
             <div class="footer-links clearfix">
                 <?php
-                    $help = \App\Http\Controllers\home\HelpController::getHelp();
+                    $help = \App\Http\Controllers\Home\HelpController::getHelp();
                 ?>
                 @foreach($help as $key=>$val)
                 <dl class="col-links col-links-first">
@@ -277,8 +219,8 @@
     </div>
     @section('js')
     <script src="/static/homes/common/myjs/jquery.min.js"></script>
-    <script src="/static/homes/data/indexNav.js"></script>
-    <script src="/static/homes/data/indexData.js"></script>
+    <script src="/data/indexNav.js"></script>
+    <script src="/data/indexData.js"></script>
     <script src="/static/homes/common/myjs/jquery.SuperSlide.js"></script>
     <script src="/static/homes/common/myjs/common.js"></script>
     <script src="/static/homes/common/myjs/index.js"></script>

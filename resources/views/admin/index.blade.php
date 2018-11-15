@@ -25,7 +25,6 @@ div.main-order{ line-height:30px; padding:10px 0 0 0;}
 </style>
 </head>
 <body>
-
 	<div class="img"></div>
 <!--main_top-->
 <table width="99%" border="0" cellspacing="0" cellpadding="0" id="main">

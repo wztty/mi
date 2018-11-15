@@ -86,7 +86,7 @@
                             </div>
                         </div>
                     </div>
-                    <a class="button" href="/home/register">注册小米官网</a>
+                    <a class="button" href="/register">注册小米官网</a>
                     
                 </form>
             </div>
