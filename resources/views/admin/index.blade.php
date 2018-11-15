@@ -1,5 +1,5 @@
-@extends('admin.public.index');
-@section('title','后台首页');
+@extends('admin.public.index')
+@section('title','后台首页')
 @section('content')
 <html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">

@@ -33,11 +33,14 @@ class Code{
 		{
 			$this->font = __DIR__.'/consola.ttf';
 		}
-		$this->create();//生成验证码
+		$this->create();//生成验证码	
 		header("Content-type:image/png");
 		imagepng($this->img);
 		imagedestroy($this->img);
-		exit;
+		//通过get方法 返回code验证码
+		return $this->get();
+		//或者直接返回code	
+		// return $this->code;
 	}
 
 	//设置字体文件

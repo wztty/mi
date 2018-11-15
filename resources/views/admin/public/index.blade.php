@@ -91,12 +91,14 @@
      <!-- Username and Functions --> 
      <div id="mws-user-functions"> 
       <div id="mws-username">
-        Hello, John Doe 
+
+        Hello, {{session('username')}}
+  
       </div> 
       <ul> 
        <li><a href="#">Profile</a></li> 
        <li><a href="#">Change Password</a></li> 
-       <li><a href="index.html">Logout</a></li> 
+       <li><a href="/admin/exit">退出</a></li> 
       </ul> 
      </div> 
     </div> 
@@ -122,6 +124,7 @@
       <button type="submit" class="mws-search-submit"><i class="icon-search"></i></button> 
      </form> 
     </div> 
+
     <!-- Main Navigation --> 
     <div id="mws-navigation"> 
      <ul> 
@@ -178,6 +181,7 @@
    <!-- Main Container Start --> 
    <div id="mws-container" class="clearfix"> 
     <div class="container"> 
+    {{session('error')}}
      @section('content')
 
      @show
