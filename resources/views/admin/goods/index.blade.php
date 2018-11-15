@@ -3,7 +3,7 @@
 
 <div class="mws-panel grid_8">
         <div class="mws-panel-header">
-            <span><i class="icon-table"></i>用户表</span>
+            <span><i class="icon-table"></i>商品列表</span>
         </div>
         <div class="mws-panel-body no-padding">
             <table class="mws-datatable-fn mws-table">
@@ -33,16 +33,23 @@
                        <td>{{$val->price}}</td>
                        <td><img src="{{$val->showImg}}" alt="" width="60"></td>
                        <td>{{$val->status}}</td>
-                       <td><a href="" class="btn btn-info">删除</a></td>
-                       <td><a href="" class="btn btn-info">修改</a></td>
+                       <td><form action="/admingoods/{{$val->id}}" method="post">
+            {{csrf_field()}}
+            {{method_field('DELETE')}}
+
+            <button type="submit" class="btn btn-success">删除</button>
+          </form></td>
+                       <td><a href="/admingoods/{{$val->id}}/edit" class="btn btn-info">修改</a></td>
                    </tr>
                 @endforeach
                 </tbody>
-
+                {{csrf_field()}}
+                {{method_field('DELETE')}}
             </table>
                 <div class="dataTables_paginate paging_full_numbers" id="pages">
               {{$goods->appends($request)->render()}}
                 </div>
+               
         </div>
     </div>
 @endsection

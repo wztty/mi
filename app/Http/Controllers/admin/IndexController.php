@@ -51,4 +51,5 @@ class IndexController extends Controller
     		return redirect('/flink')->with('success','修删除失败');	
 		}
     }
+   
 }

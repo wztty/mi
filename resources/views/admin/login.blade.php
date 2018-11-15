@@ -11,10 +11,15 @@
 		<h1>admin</h1>
 		<h2>欢迎使用后台管理平台</h2>
 		<div class="form">
-			<p /static/login="color:red">用户名错误</p>
-			<form action="#" method="post">
+			
+			<p /static/login="color:red"></p>
+			<form action="/admin/store" method="post">
+				@if(session('error'))
+				{{session('error')}}
+				@endif
 				<ul>
 					<li>
+
 					<input type="text" name="username" class="text"/>
 						<span><i class="fa fa-user"></i></span>
 					</li>
@@ -28,6 +33,7 @@
 						<img src="{{url('/admin/code')}}" alt="" onclick="this.src='{{url('admin/code')}}?Math.random()'" style="cursor:pointer">
 					</li>
 					<li>
+						{{csrf_field()}}
 						<input type="submit" value="立即登陆"/>
 					</li>
 				</ul>
