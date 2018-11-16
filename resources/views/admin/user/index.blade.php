@@ -1,4 +1,4 @@
-@extends('admin.index')
+@extends('admin.public.index')
 @section('content')
     <div class="mws-panel grid_8">
         <div class="mws-panel-header">
@@ -17,17 +17,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($users as $user)
+                   
+                 @foreach($data as $row)
+                  
                     <tr>
-                        <td>{{$user['id']}}</td>
-                        <td>{{$user['username']}}</td>
-                        <td>{{$user['phone']}}</td>
-                        <td>{{$user['email']}}</td>
-                        <td>{{$user['status']}}</td>
+                        <td>{{$row->id}}</td>
+                        <td>{{$row->username}}</td>
+                        <td>{{$row->phone}}</td>
+                        <td>{{$row->email}}</td>
+                        <td>{{$row->status}}</td>
+                        <td></td>
                         <td>
                             <span class="btn-group">
-                                <a href="/admin/user/edit?id={{$user['id']}}" class="btn btn-small"><i class="icon-pencil"></i></a>
-                                <a href="/admin/user/delete?id={{$user['id']}}" class="btn btn-small"><i class="icon-trash"></i></a>
+                                <a href="" class="btn btn-small"><i class="icon-pencil"></i>删除</a>
+                                <a href="" class="btn btn-small"><i class="icon-trash">修改</i></a>
                             </span>
                         </td>
 

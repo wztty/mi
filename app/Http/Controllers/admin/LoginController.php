@@ -22,13 +22,14 @@ class LoginController extends Controller
         $code = new \Code; 
         // dd($code);
         //开启session
-        session_start();
+        // session_start();
         //创建验证码并返回验证码的值
-        $bbb =  $code->make();
+        $bbb = $code->make();
+        
         //存储到session中
         $_SESSION['code']=$bbb;
         //截断 不然乱码
-        exit;
+        // die;
     }
 
     // public function store(Request $request)8
@@ -67,11 +68,8 @@ class LoginController extends Controller
         //获取前台用户输入的code值
         $usercode = $request->input('code');
         //开启session
-        session_start();
         //获取session值
         $code = $_SESSION['code'];
-
-        
         if($code != $usercode){
             return back()->with('error','验证码有误');
         }

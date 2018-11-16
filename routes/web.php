@@ -43,4 +43,4 @@ Route::any('/admin/store','admin\LoginController@store');
 Route::any('/admin/exit', 'admin\LoginController@index');
 
 // 后台用户模块
-Route::any('/admin/','admin\user\userController@login');
+Route::resource('/adminuser','admin\userController');
