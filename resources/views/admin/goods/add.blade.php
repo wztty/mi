@@ -14,7 +14,7 @@
                         <label class="mws-form-label">商品名称</label>
                         <div class="mws-form-item">
                             <input type="text" class="small" title="" name="title" value="{{old('title')}}">
-                            <!-- <input type="hidden" name="sub_title" value=""> -->
+                            <input type="hidden" name="cate_id" value="$cates->cates_id">
                         </div>
                     </div>
                     <div class="mws-form-row" style="width: 490px;" >

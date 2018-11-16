@@ -27,7 +27,8 @@
   <!-- Theme Stylesheet --> 
   <link rel="stylesheet" type="text/css" href="/static/admin/b/css/mws-theme.css" media="screen" /> 
   <link rel="stylesheet" type="text/css" href="/static/admin/b/css/themer.css" media="screen" /> 
-  <link rel="stylesheet" type="text/css" href="/static/admin/b/css/my.css" media="screen" /> 
+  <link rel="stylesheet" type="text/css" href="/static/admin/b/css/my.css" media="screen" />
+  <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script> 
   <title>@yield('title')</title> 
  </head> 
  <body> 
@@ -128,8 +129,9 @@
     <!-- Main Navigation --> 
     <div id="mws-navigation"> 
      <ul> 
-      <li> <a href="#"><i class="icon-user"></i> 用户管理</a> 
+      <li> <a href="#"><i class="icon-user"></i>用户/收货地址</a> 
        <ul class="closed"> 
+<<<<<<< HEAD
         <li><a href="/adminuser">会员列表</a></li> 
        </ul> </li> 
        <li> <a href="#"><i class="icon-user"></i> 权限管理</a> 
@@ -140,6 +142,15 @@
        <ul class="closed"> 
         <li><a href="">分类添加</a></li> 
         <li><a href="">分类列表</a></li> 
+=======
+        <li><a href="/adminuser">会员列表</a></li>
+        <li><a href="/address">收货地址管理</a></li> 
+       </ul> </li> 
+      <li> <a href="#"><i class="icon-th-list"></i> 分类管理</a> 
+       <ul class="closed"> 
+        <li><a href="{{url('/admincates/create')}}">分类添加</a></li> 
+        <li><a href="{{url('/admincates')}}">分类列表</a></li> 
+>>>>>>> c5c61eb9980eba58ae5f468b7c90f74109f50324
        </ul> </li> 
       <li> <a href="#"><i class="icon-file"></i> 品牌管理</a> 
        <ul class="closed"> 
@@ -148,6 +159,7 @@
        </ul> </li> 
       <li> <a href="#"><i class="icon-file"></i> 商品管理</a> 
        <ul class="closed"> 
+<<<<<<< HEAD
         <li><a href="">商品添加</a></li> 
         <li><a href="">商品列表</a></li> 
        </ul> </li> 
@@ -160,6 +172,11 @@
        <ul class="closed"> 
         <li><a href="">会员列表</a></li> 
        </ul> </li> 
+=======
+        <li><a href="/comments">评价查看</a></li> 
+       </ul> </li>
+
+>>>>>>> c5c61eb9980eba58ae5f468b7c90f74109f50324
         <li> <a href="#"><i class="icon-th-list"></i> 订单管理</a> 
        <ul class="closed"> 
         <li><a href="">订单列表</a></li> 
@@ -187,11 +204,19 @@
      </ul> 
     </div> 
    </div> 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c5c61eb9980eba58ae5f468b7c90f74109f50324
    <!-- Main Container Start --> 
    <div id="mws-container" class="clearfix"> 
     <div class="container"> 
     {{session('error')}}
      @section('content')
+<<<<<<< HEAD
+=======
+
+>>>>>>> c5c61eb9980eba58ae5f468b7c90f74109f50324
 
      @show
       </div> 

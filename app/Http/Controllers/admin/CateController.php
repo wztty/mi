@@ -29,6 +29,7 @@ class CateController extends Controller
             //重复字符串函数
             $list[$key]->name=str_repeat("--",$num).$value->name;
         }
+
         return view('admin.cates.index',['list'=>$list,'request'=>$request->all()]);
     }
 
@@ -49,6 +50,7 @@ class CateController extends Controller
         }
 
         return $list;
+
         }
 
 
@@ -80,6 +82,19 @@ class CateController extends Controller
         //处理分类添加
         $info=$request->except('_token');
         //dd($info);
+        //判断是否有文件上传
+        if($request->hasFile('img')){
+            //获取文件上传后缀
+            $ext=$request->file('img')->getClientOriginalExtension();
+            //随机图片的名字
+            $name=time().rand(1000,9999);
+            //把图片移动到指定目录下
+            $request->file('img')->move('./static/image/', $name.'.'.$ext);
+            //拼接路劲
+            $imgpath = './static/image/'.$name.'.'.$ext;
+            
+            //dd($imgpath);
+        }
 
 
         $pid=$request->input('pid');
@@ -87,6 +102,7 @@ class CateController extends Controller
 
             $info['path']='0';
             $info['status']=1;
+            $info['img']='';
 
         }else{
             //根据pid得到父类
@@ -94,13 +110,14 @@ class CateController extends Controller
             //拼接path
             $info['path']=$list->path.",".$list->id;
             $info['status']=1;
+            $info['img']=$imgpath;
 
         }
 
         if(DB::table('cates')->insert($info)){
-           return redirect('/admin/cates');
+           return redirect('/admin/cates')->with('success','添加成功');
         }else{
-          return  redirect('/admin/cates/create');
+          return  redirect('/admin/cates/create')->with('error','添加失败');
         }
         
     }
@@ -113,7 +130,11 @@ class CateController extends Controller
      */
     public function show($id)
     {
-        //
+         //修改分类
+        $info=DB::table('cates')->where('id','=',$id)->first();
+        //得到全部分类
+        $data=DB::table('cates')->get();
+        return view('admin.cates.edit',['info'=>$info,'data'=>$data]);
     }
 
     /**
@@ -124,7 +145,8 @@ class CateController extends Controller
      */
     public function edit($id)
     {
-        //
+       
+        
     }
 
     /**
@@ -136,7 +158,53 @@ class CateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd($_POST);
+        //根据id查询原数据
+        $info=DB::table('cates')->where('id','=',$id)->first();
+        //dd($info);
+        //得到原数据状态
+        $data['status']=$info->status;
+         //得到原数据图片路径以便删除
+        $imgpath=$info->img;
+        //得到数据的父id
+        $data['pid']=$_POST['pid'];
+        //得到分类名
+        $data['name']=$_POST['name'];
+        //dd($data);
+        //根据父id查询父类路劲
+        $path=DB::table('cates')->where('id','=',$data['pid'])->first()->path;
+        //拼接新路径
+        $data['path']=$path.','.$data['pid'];
+        //dd($data);
+        //判断是否有图片上传
+        if($request->hasFile('img')){
+
+            //获取文件上传后缀
+            $ext=$request->file('img')->getClientOriginalExtension();
+            //随机图片的名字
+            $name=time().rand(1000,9999);
+            //把图片移动到指定目录下
+            $request->file('img')->move('./static/image/',$name.'.'.$ext);
+            //拼接新的路劲
+            $data['img']='./static/homes/common/image/'.$name.'.'.$ext;
+            //删除老图片
+            @unlink($imgpath);
+        }else{
+            //得到老图片路径
+            $data['img']=$info->img;
+        }
+
+        //dd($data);
+        $bool=DB::table('cates')->where('id','=',$id)->update($data);
+
+        if($bool){
+
+            return redirect('/admincates')->with('success','修改成功');
+
+        }else{
+
+            return redirect('/admincates')->with('success','修改失败');
+        }
     }
 
     /**
