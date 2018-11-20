@@ -4,7 +4,9 @@
  <head>
      <style>
         li{list-style:none;}
+        .del{display:block;width:40px;height:20px;margin:10px;margin-left:800px;}
      </style>
+     <script src="/static/js/jquery-1.8.3.min.js"></script>
  </head>
  <body>
      <div class="span16"> 
@@ -32,31 +34,44 @@
           <div id="J_orderListPages"> 
            <ul class="order-list">
                 @foreach($order as $val )
-                <li class="uc-order-item uc-order-item-pay"> 
+
+                <li class="uc-order-item uc-order-item-pay "> 
                    <div class="order-detail">
                     <div class="order-summary"> 
                      <div class="order-status">
-                      @if($val->pay_status==1)
+                      @if($val->pay_status==0)
                       等待支付
-                      @elseif($val->pay_status==2)
+                      @elseif($val->pay_status==1)
                       已支付
                       @endif
                       
                      </div> 
+                     <?php 
+                          $total = '';
+
+                          $goods = \App\Http\Controllers\home\UserController::getgoods($val->id); 
+
+                          foreach ($goods as $key => $value) {
+                            
+                            $total += $value->price * $value->num;
+                          }
+
+
+                      ?>
                      <p class="order-desc J_deliverDesc"> 现在支付，预计2-3天送达 <span class="beta">Beta</span> </p> 
                     </div>
                     <table class="order-detail-table"> 
                      <thead> 
                       <tr> 
                        <th class="col-main"> <p class="caption-info"> {{$val->created_at}} <span class="sep">|</span> {{$val->consignee}} <span class="sep">|</span> 订单号： <a href="/user/orderView?num={{$val->order_num}}">{{$val->order_num}}</a> <span class="sep">|</span> 在线支付 </p> </th> 
-                       <th class="col-sub"> <p class="caption-price"> 订单金额： <span class="num"></span> 元 </p> </th> 
+                       <th class="col-sub"> <p class="caption-price"> 订单金额： <span class="num">{{$total}}</span> 元 </p> </th> 
                       </tr> 
                      </thead> 
                      <tbody> 
                       <tr> 
                        <td class="order-items"> 
                         <ul class="goods-list">
-                        <?php $goods = \App\Http\Controllers\home\UserController::getgoods($val->id); ?>
+                        
 
                         @foreach($goods as $value)
                             <?php $imgs = \App\Http\Controllers\home\UserController::getimg($value->sku_id); $num=''; ?>
@@ -68,21 +83,53 @@
                             
                         @endforeach
                         </ul> </td> 
-                       <td class="order-actions"> <a class="btn btn-small btn-primary" href="/order/pay?id=23" target="_blank">立即支付</a> 
-                        <!--<a class="btn btn-small btn-line-gray" href="user/orderView?id=23">订单详情</a>--> </td>
+
+                       <td class="order-actions"> <a class="btn btn-small btn-primary" href="/order/pay?id=23" target="_blank">
+                       @if($val->pay_status == 0)
+                       立即支付
+                      @elseif($val->pay_status == 1)
+                        已付款
+                      @endif
+                       </a> 
+                       </td>
                       </tr> 
                      </tbody> 
                     </table> 
                    </div> 
+                  
+                    <a href="javascript:void(0);" class="del">删除</a>
+                    <input type="hidden" value="{{$val->id}}" class="int">
             </li>
             @endforeach
            </ul> 
+
           </div> 
          </div> 
         </div> 
        </div> 
     </div>
  </body>
+ <script>
+    $('.del').click(function(){
+
+      //获得id
+    var id = $(this).next().val();
+    var s = $(this).parents('.uc-order-item');
+      //使用ajax
+    $.get('/delorder',{id:id},function(data){
+
+        if(data == 1)
+        {
+            s.remove();
+            confirm("确认要删除？");
+        }else{
+
+          alert('系统繁忙');
+        }
+    });
+
+    });
+ </script>
 </html>
 @endsection
 

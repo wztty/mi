@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use DB;
 use App\Models\Addshop;
 use Config;
+use App\Good;
 
 class GoodsController extends Controller
 {
@@ -67,9 +68,8 @@ class GoodsController extends Controller
        
         $data=$request->except('_token');
         
-        $data=$request->only(['title','cate_id','price','content','img','showimg','status']); 
+        $data=$request->only(['title','cate_id','price','content','img','showimg','status','sub_title']); 
         // dd($data);
-        $data['sub_title']='';
         if($request->hasFile("img")){
             //初始化名字获取后缀
             $name=time()+rand(1,10000);
@@ -78,10 +78,11 @@ class GoodsController extends Controller
             $request->file("img")->move(Config::get('app.uploads'),$name.".".$ext);
             //初始化$data
             $data['img']=trim(Config::get('app.uploads').'/'.$name.".".$ext,'.');
-            // dd($data);
+             dd($data);
             //执行数据库的插入
             
-            if(DB::table("goods")->insert($data)){
+            if(Good::create($data)){
+
                 return redirect("/admingoods")->with('suceess','添加成功');
             }
         }

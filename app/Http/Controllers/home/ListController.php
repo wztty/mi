@@ -88,6 +88,7 @@ class ListController extends Controller
         $good->img = explode(',',$good->img);
         //获得skus表信息
         $skus = $good->skus ;
+
         //使用$arr存储商品型号
         $arr = [];
         foreach ($skus as $key => $value) {
@@ -116,7 +117,8 @@ class ListController extends Controller
         $good->attr = $color;
         //dd($good->attr);
         $good->info = $info;
-        
+        //得到skuid
+        $skuid=$good->skus()->where('attr',$attr)->first()->id;
        //dd($good->info);
         //获取所有评论
         $comments=DB::table('comments')->where('pid','=',0)->get();
@@ -124,6 +126,6 @@ class ListController extends Controller
         //最新评论
         $newcommend=DB::table('comments')->orderBy('created_at','desc')->take('2')->get();
         //dd($newcommend);
-        return view('home.lists.detail',['good'=>$good,'title'=>'详情','comments'=>$comments,'newcommend'=>$newcommend]);
+        return view('home.lists.detail',['good'=>$good,'title'=>'详情','comments'=>$comments,'newcommend'=>$newcommend,'skuid'=>$skuid]);
     }
 }

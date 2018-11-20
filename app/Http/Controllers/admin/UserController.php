@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Hash;
 class UserController extends Controller
 {
     /**
@@ -26,7 +27,12 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-
+     public static function lookcate($uid)
+    {
+        $info=DB::table('users')->where('id','=',$uid)->first();
+        $name=$info->username;
+        return $name;
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -114,6 +120,57 @@ class UserController extends Controller
         }else{
 
             return redirect('/adminuser')->with('error','系统繁忙');
+        }
+    }
+
+
+    //个人信息
+    public static function userdata($name)
+    {
+
+        $info = DB::table('users')->where('username','=',$name)->first();
+
+        return $info;
+    }
+
+
+    //密码修改
+    public function updatepass()
+    {
+        $name = session('username');
+
+        $info = DB::table('users')->where('username','=',$name)->first();
+
+        return view('admin.password',['info'=>$info]);
+    }
+
+    //处理密码修改
+    public function newpass(Request $request)
+    {
+        $name = session('username');
+        //得到旧密码
+        $pass = $request->input('password');
+        //得到新密码
+        $newpass['password'] = Hash::make($request->input('newpass'));
+
+        $info = DB::table('users')->where('username','=',$name)->first();
+        //dd($info);
+        //判断旧密码是否正确
+        if(Hash::check($pass,$info->password)){
+
+           $row = DB::table('users')->where('username','=',$name)->update($newpass);
+
+           if($row){
+
+                return redirect('/admin/login')->with('success','修改成功请重新登陆');
+           }else{
+
+                 return redirect('/updatepass')->with('error','修改失败');
+           }
+
+        }else{
+
+            return back()->with('error','你输入的旧密码有误');
         }
     }
 }

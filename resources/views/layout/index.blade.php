@@ -42,7 +42,7 @@
             <?php 
                 }else{ 
 
-                    $user = \App\Http\Controllers\Home\UserController::gainUsername();
+                    $user = \App\Http\Controllers\Home\UserController::gainUsername(session('uid'));
             ?>
             <div class="topbar-info" id="J_userInfo">
                 <span class="user">

@@ -21,8 +21,6 @@ class LoginController extends Controller
     {
         $code = new \Code; 
         // dd($code);
-        //开启session
-        session_start();
         //创建验证码并返回验证码的值
         $bbb =  $code->make();
         //存储到session中
@@ -31,23 +29,6 @@ class LoginController extends Controller
         exit;
     }
 
-    // public function store(Request $request)8
-    // {
-    //     // 获取登录用户名和密码
-    //     $name=$request->input("username");
-    //     $password=$request->input("password");
-    //     // 要数据表的数据做对比
-    //     // 检测用户名
-    //     $info=DB::table("users")->where("usernaem",'=',$name)->first();
-    //     // 判断
-    //     if($info){
-    //         // 检测密码
-    //         echo "ok";
-    //     }else{
-    //         // echo "用户名有误";
-    //         return back()->with('error','用户名有误');
-    //     }
-    // }
 
     
     public function index(Request $request)
@@ -79,6 +60,8 @@ class LoginController extends Controller
         // dd($password,$name);
         //检测用户名
         $info=DB::table("users")->where("username",'=',$name)->first();
+
+        $uid = $info->id;
         //判断
         if($info){
             //检测密码
@@ -117,9 +100,9 @@ class LoginController extends Controller
                 // var_dump($nodelist);exit;
 
                 // 3.把所有权限信息 存储在session里
-                session(['nodelist'=>$nodelist]);
+                session(['nodelist'=>$nodelist,'uid'=>$uid]);
                 // 返回路径，session信息弹出登录成功
-                return redirect("admin")->with('success','登陆成功');
+                return redirect("/admin")->with('success','登陆成功');
         }else{
                 // 读取页面提交，提示信息密码有误
                 return back()->with('error','密码有误');

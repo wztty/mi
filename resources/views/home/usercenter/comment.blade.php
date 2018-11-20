@@ -20,6 +20,7 @@
                <div class="user-image"> 
                 <img src="{{$pic}}" alt="" width="80" /> 
                </div> 
+               
                <div class="user-emoj">
                 <i class="iconfont"></i> 
                </div> 

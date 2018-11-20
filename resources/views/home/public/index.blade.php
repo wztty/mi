@@ -33,7 +33,7 @@
                     {{--</div>--}}
                 {{--</div>--}}
             </div>
-             <?php if(!session('username')){?>
+             <?php if(!session('uid')){?>
             <div class="topbar-info" id="J_userInfo">
                 <a  rel="nofollow" class="link" href="/login" data-needlogin="true">登录</a>
                 <span class="sep">|</span>
@@ -42,12 +42,12 @@
             <?php 
                 }else{ 
 
-                    $user = \App\Http\Controllers\home\UserController::gainUsername();
+                    $user = \App\Http\Controllers\home\UserController::gainUsername(session('uid'));
             ?>
             <div class="topbar-info" id="J_userInfo">
                 <span class="user">
                     <a rel="nofollow" class="user-name" href="/user/comment" target="_blank">
-                        <span class="name">{{session('username')}}</span> <i class="iconfont"></i>
+                        <span class="name">{{$user->username}}</span> <i class="iconfont"></i>
                     </a>
                     <ul class="user-menu" style="display: none;">
 

@@ -17,6 +17,12 @@
                             <!-- <input type="hidden" name="sub_title" value=""> -->
                         </div>
                     </div>
+                    <div class="mws-form-row">
+                        <label class="mws-form-label">商品关键词</label>
+                        <div class="mws-form-item">
+                            <input type="text" class="small" title="" name="sub_title" value="{{old('sub_title')}}">
+                        </div>
+                    </div>
                     <div class="mws-form-row" style="width: 490px;" >
                         <label class="mws-form-label">商品价格</label>
                         <div class="mws-form-item">

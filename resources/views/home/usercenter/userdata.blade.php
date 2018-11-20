@@ -62,11 +62,10 @@
                    <img src="{{$info->pic}}" alt="头像" width="100"> 
                   </div> 
                  </div> 
-                 
-                 <div class="mws-form-row bordered"> 
+                 <div class="mws-form-row bordered " > 
                   <label class="mws-form-label">修改头像</label> 
-                  <div class="mws-form-item"> 
-                   <input type="file" name="pic" style="width:200px;"><br>
+                  <div class="mws-form-item" > 
+                   <input type="file" name="pic" ><br>
                   </div> 
                  </div> 
 

@@ -320,6 +320,8 @@ var inpData = {};
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    
     //去生成订单
     $('#J_checkoutToPay').on('click',function(ev){
 
@@ -344,3 +346,5 @@ var inpData = {};
         })
     })
 }(window.jQuery);
+
+

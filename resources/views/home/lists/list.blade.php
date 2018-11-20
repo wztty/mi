@@ -81,7 +81,7 @@
                         <div style="width:212px;margin:0 auto;" >
                             <ul class="thumb-list clearfix J_imgList">
                             
-                                <a><img src="{{$good->img}}" width="34" height="34" /></a>
+                                <a><img src="{{$good->showImg}}" width="34" height="34" /></a>
 
                             </ul>
                         </div>

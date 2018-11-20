@@ -206,6 +206,7 @@ $(function(){
             alert('未选择任何商品');
             return;
         }
+
         $.ajax({
             url:'/order/confirm',
             type:"POST",
@@ -213,7 +214,10 @@ $(function(){
             dataType:'json',
             success:function(data){
                 if(data.status ==0){
-                    window.location.href = data.msg
+
+                    //alert(data);
+                    window.location.href = data.msg;
+
                 }else{
                     alert(data.msg);
                 }

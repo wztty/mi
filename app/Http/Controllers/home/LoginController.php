@@ -47,16 +47,17 @@ class LoginController extends Controller
         $password=$request->input("password");
         //要数据表的数据做对比
         //检测用户名
-        $info=DB::table("users")->where("username",'=',$name)->first();
+        $info = DB::table("users")->where("username",'=',$name)->first();
 
-        $uid=$info->id;
+        $uid = $info->id;
+        //dd($uid);
         //判断
         if($info){
             //检测密码
             //哈希数据值检测
             if(Hash::check($password,$info->password)){
                 //存储在session里
-                session(['username'=>$name,'uid'=>$uid]);
+                session(['uid'=>$uid]);
 
                 return redirect("/")->with('success','登陆成功');            
 
@@ -73,7 +74,7 @@ class LoginController extends Controller
     public function loginout(Request $request)
     {
         //删除ssesion
-       Session()->flush();
+       $request->session()->pull('uid');
        return redirect('/');
         
     }

@@ -16,6 +16,8 @@
 			<form action="/admin/store" method="post">
 				@if(session('error'))
 				{{session('error')}}
+				@elseif(session('success'))
+				{{session('success')}}
 				@endif
 				<ul>
 					<li>

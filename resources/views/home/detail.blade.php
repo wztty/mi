@@ -76,6 +76,7 @@
                 </div>
                 <div class="span7 goods-info-rightbox">
                     <div class="goods-info-leftborder"></div>
+
                     <form action="##" method="get" id="yourformid">
                         <dl class="goods-info-box ">
                         <dt class="goods-info-head">
@@ -149,6 +150,7 @@
 
                     </dl>
                     </form>
+                    
                 </div>
             </div>
         </div>

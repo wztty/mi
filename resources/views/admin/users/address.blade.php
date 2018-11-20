@@ -10,7 +10,7 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>用户id</th>
+                    <th>用户名</th>
                     <th>收货人</th>
                     <th>电话</th>
                     <th>省份</th>
@@ -26,7 +26,11 @@
                 @foreach($address as $val)
                    <tr style="text-align:center;cursor:pointer;">
                       <td>{{$val->id}}</td>
-                      <td>{{$val->user_id}}</td>
+                    <td>
+                      <?php 
+                          echo   $user=\App\Http\Controllers\admin\UserController::lookcate($val->user_id);
+                        ?> 
+                    </td>
                       <td>{{$val->consignee}}</td>
                       <td>{{$val->tel}}</td>
                       <td>{{$val->province}}</td>

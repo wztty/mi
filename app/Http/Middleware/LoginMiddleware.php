@@ -15,6 +15,16 @@ class LoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        
+        if(!$request->session()->has('uid'))
+        {
+            
+            return redirect('/login')->with('success','请先登陆');
+
+        }else{
+
+            return $next($request);
+        }
+
     }
 }

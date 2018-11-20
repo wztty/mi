@@ -20,20 +20,21 @@ class UserController extends Controller
     public static function gainUsername()
     {
     	//得到sseione里的username值
-    	 $name=session('username');
+    	 $uid=session('uid');
     	 //根据name查询用户信息
-    	 $info=DB::table('users')->where('username','=',$name)->first();
+    	 $info=DB::table('users')->where('id','=',$uid)->first();
+
     	 return $info;
     }
 
     public function index()
     {
 
-        //得到sseione里的username值
-         $name=session('username');
+         //得到sseione里的username值
+         $id=session('uid');
          //dd($name);
          //查询登陆的用户信息
-         $info=DB::table('users')->where('username','=',$name)->first();
+        $info=DB::table('users')->where('id','=',$id)->first();
 
     	return view('home.usercenter.userdata',['info'=>$info]);
     }
@@ -41,11 +42,11 @@ class UserController extends Controller
     //修改个人资料数据
     public function dataedit(Request $request)
     {
-        //dd($request->all());
-         $name=session('username');
+        //得到sseione里的username值
+         $id=session('uid');
          //dd($name);
          //查询登陆的用户信息
-         $info=DB::table('users')->where('username','=',$name)->first();
+        $info=DB::table('users')->where('id','=',$id)->first();
          //dd($info);
          $id=$info->id;
          //dd($id);
@@ -88,10 +89,11 @@ class UserController extends Controller
     //添加收货地址
     public function address()
     {
-        $name=session('username');
+         //得到sseione里的username值
+         $id=session('uid');
          //dd($name);
          //查询登陆的用户信息
-         $info = DB::table('users')->where('username','=',$name)->first();
+        $info=DB::table('users')->where('id','=',$id)->first();
          //得到uid
          $uid = $info->id;
         //查询收货地址
@@ -129,10 +131,11 @@ class UserController extends Controller
     //处理添加收货地址
     public function doadd(Request $request)
     {
-            $name=session('username');
+        //得到sseione里的username值
+        $id=session('uid');
          //dd($name);
          //查询登陆的用户信息
-         $info = DB::table('users')->where('username','=',$name)->first();
+        $info=DB::table('users')->where('id','=',$id)->first();
 
         //dd($request->all());
         $data=$request->except('_token');
@@ -169,34 +172,95 @@ class UserController extends Controller
     public function userorder()
     {
         //得到sseione里的username值
-         $name=session('username');
+         $id=session('uid');
          //dd($name);
          //查询登陆的用户信息
-        $info=DB::table('users')->where('username','=',$name)->first();
-        $id = $info->id;
+        $info=DB::table('users')->where('id','=',$id)->first();
 
-        $order=DB::table('orders')->where('user_id','=',$id)->get();
+        $uid = $info->id;
+
+        $order=DB::table('orders')->where('user_id','=',$uid)->get();
         // dd($order);
+        //获取订单id
        
        $nums='';
+
+
         
         return view('home.usercenter.order',['order'=>$order,'nums'=>$nums]);
+    }
+
+    //Ajax删除订单
+    public function delorder(Request $request)
+    {
+        //获得id
+        $oid = $request->input('id');
+        //删除订单
+        $bool = DB::table('orders')->where('id','=',$oid)->delete();
+
+        if($bool){
+
+            //同时删除对应order_goods表 商品
+            if(DB::table('order_goods')->where('order_id','=',$oid)->delete()){
+
+                echo 1;
+                
+            }else{
+
+                echo 3;
+            }
+            
+
+        }else{
+            echo 2;
+        }
+
     }
 
     //查看用户评论
     public function usercomment()
     {
-         $name=session('username');
+        //得到sseione里的username值
+         $id=session('uid');
          //dd($name);
          //查询登陆的用户信息
-        $info=DB::table('users')->where('username','=',$name)->first();
+        $info=DB::table('users')->where('id','=',$id)->first();
+
         $pic = $info->pic;
 
-        $id = $info->id;
+        $uid = $info->id;
 
-        $comment=DB::table('comments')->where('user_id','=',$id)->get();
+        $comment=DB::table('comments')->where('user_id','=',$uid)->get();
 
         return view('home.usercenter.comment',['comment'=>$comment,'pic'=>$pic]);
+    }
+
+    //修改收货地址
+    public function editaddress(Request $request)
+    {
+        $id = $request->input('id');
+        //获取要修改地址信息
+        $info = DB::table('addresses')->where('id','=',$id)->first();
+        //dd($info);
+        return view('home.usercenter.edit',['info'=>$info]);
+    }
+
+    //处理收货地址修改
+    public function doeditaddress(Request $request)
+    {
+        $data = $request->except('_token','id');
+        //dd($data);
+        $id = $request->id;
+        //修改数据
+        $row = DB::table('addresses')->where('id','=',$id)->update($data);
+
+        if($row){
+
+            return redirect('/useraddress')->with('success','修改成功');
+        }else{
+
+            return redirect('/useraddress')->with('success','修改失败');
+        }
     }
 
 }

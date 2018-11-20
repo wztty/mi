@@ -51,7 +51,7 @@
             <?php 
                 }else{ 
 
-                    $user = \App\Http\Controllers\home\UserController::gainUsername();
+                    $user = \App\Http\Controllers\home\UserController::gainUsername(session('username'));
             ?>
             <div class="topbar-info" id="J_userInfo">
                 <span class="user">

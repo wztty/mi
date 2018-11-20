@@ -22,6 +22,7 @@
   <link rel="stylesheet" type="text/css" href="/static/admin/b/css/mws-theme.css" media="screen" /> 
   <link rel="stylesheet" type="text/css" href="/static/admin/b/css/themer.css" media="screen" /> 
   <link rel="stylesheet" type="text/css" href="/static/admin/b/css/my.css" media="screen" />
+
   <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script> 
   <title>@yield('title')</title> 
  </head> 
@@ -77,23 +78,28 @@
       </div> 
      </div> 
     </div> 
+    <?php 
+
+          $user =  \App\Http\Controllers\admin\UserController::userdata(session('username'))
+
+     ?>
     <!-- User Information and functions section --> 
     <div id="mws-user-info" class="mws-inset"> 
      <!-- User Photo --> 
      <div id="mws-user-photo"> 
-      <img src="/static/admin/b/example/profile.jpg" alt="User Photo" /> 
+      <img src="{{$user->pic}}" alt="User Photo" /> 
      </div> 
      <!-- Username and Functions --> 
      <div id="mws-user-functions"> 
       <div id="mws-username">
 
-        Hello, {{session('username')}}
+        Hello, {{$user->nikename}}
   
       </div> 
       <ul> 
-       <li><a href="#">Profile</a></li> 
-       <li><a href="#">Change Password</a></li> 
-       <li><a href="/admin/exit">退出</a></li> 
+       <li><a href="#">个人资料</a></li> 
+       <li><a href="/updatepass">修改密码</a></li> 
+       <li><a href="/admin/logout">退出</a></li> 
       </ul> 
      </div> 
     </div> 
@@ -147,7 +153,7 @@
 
         <li> <a href="#"><i class="icon-th-list"></i> 订单管理</a> 
        <ul class="closed"> 
-        <li><a href="">订单列表</a></li> 
+        <li><a href="/admin/order">订单列表</a></li> 
        </ul> </li>  
 
        <li> <a href="#"><i class="icon-arrow-down-3"></i></i> 友情链接</a> 
@@ -227,6 +233,7 @@
     <script src="js/libs/excanvas.min.js"></script>
     <![endif]--> 
   <script src="/static/admin/b/plugins/flot/jquery.flot.min.js"></script> 
+
   <script src="/static/admin/b/plugins/flot/plugins/jquery.flot.tooltip.min.js"></script> 
   <script src="/static/admin/b/plugins/flot/plugins/jquery.flot.pie.min.js"></script> 
   <script src="/static/admin/b/plugins/flot/plugins/jquery.flot.stack.min.js"></script> 

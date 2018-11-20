@@ -76,7 +76,9 @@
                 </div>
                 <div class="span7 goods-info-rightbox">
                     <div class="goods-info-leftborder"></div>
-                    <form action="##" method="get" id="yourformid">
+
+                    <form action="/addToCart" method="get" id="yourformid">
+                        {{csrf_field()}}
                         <dl class="goods-info-box ">
                         <dt class="goods-info-head">
                         <dl id="J_goodsInfoBlock">
@@ -126,8 +128,9 @@
                             @endforeach
                             <!--颜色-->
 
-
-
+                          
+                
+                                <input type="hidden" name="skuid" value="{{$skuid}}" class="skuid">
                                 <input type="hidden" name="sku_attr" value="">
                                 <input type="hidden" name="good_id" value="{{$good->id}}">
                                 <input type="hidden" name="sku_color" value="">
@@ -143,6 +146,7 @@
                                         <li class="J_scrollHref " data-href="#goodsComment" data-index="2"> <i class="iconfont"></i> 满意度<b>99.1%</b> </li>
                                     </ul>
                                 </dd>
+                          
                         </dl>
                         </dt>
 
@@ -359,12 +363,12 @@
 
 <script src="/data/indexNav.js"></script>
 <script src="/data/indexData.js"></script>
-
 <script src="/static/homes/common/myjs/common.js"></script>
 
 @show
 @section('LDjs')
 <script type="text/javascript">
+    //选择版本
     $('[name="attr"]').click(function () {
         var attr = $(this).attr('title');
         var price = $(this).attr('price');
@@ -379,6 +383,9 @@
         $('[num="'+attr+'"]').attr('class','').siblings('[num]').attr('class','hidden');
 
     });
+
+
+    //选择颜色
     $('[name="color"]').click(function () {
         var color = $(this).html();
 
@@ -391,10 +398,12 @@
         return false;
     });
 
-    $('#goodsDetailAddCartBtn').click(function () {
+
+    // //加入购物车
+   $('#goodsDetailAddCartBtn').click(function () {
 
         console.log($('#yourformid').serialize());
-//        return false;
+        //return false;
         $.ajax({
 
             type: "get",

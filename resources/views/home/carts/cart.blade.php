@@ -1,10 +1,10 @@
-@extends('layout.index')
+@extends('home.layout.index')
 @section('title','购物车')
 @section('css')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/homes/common/css/base.min.css" />
-    <link rel="stylesheet" href="/homes/common/css/cart.min.css" />
+    <link rel="stylesheet" href="/static/homes/common/css/base.min.css" />
+    <link rel="stylesheet" href="/static/homes/common/css/cart.min.css" />
 @endsection  
 
 @section('header')
@@ -215,11 +215,11 @@
                     <li class="J_xm-recommend-list span4">
                         <dl>
                             <dt>
-                                <a href="//item.mi.com/1154000008.html" >
+                                <a href="{{url('/detail?id=$v->id')}}" >
                                     <img src="{{$v->showImg}}" width="120" alt="米家小白智能摄像机"></a>
                             </dt>
                             <dd class="xm-recommend-name">
-                                <a href="//item.mi.com/1154000008.html">{{$v->skus()->first()->title}}</a>
+                                <a href="{{url('/detail?id=$v->id')}}">{{$v->skus()->first()->title}}</a>
                             </dd>
                             <dd class="xm-recommend-price">{{$v->skus()->first()->price}}元</dd>
                             <dd class="xm-recommend-tips">
@@ -241,8 +241,8 @@
 <script>
     var listItem = [{{$listItem}}];
 </script>
-<script src="/homes/common/myjs/jquery.min.js"></script>
-<script src="/homes/common/myjs/cart.js"></script>
+<script src="/static/homes/common/myjs/jquery.min.js"></script>
+<script src="/static/homes/common/myjs/cart.js"></script>
 <script>
     //鼠标滑过显示个人中心菜单效果
     $('#J_userInfo').on('mouseenter','.user',function(){

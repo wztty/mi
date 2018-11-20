@@ -10,7 +10,7 @@
            <div class="box-bd"> 
             <div class="user-address-list J_addressList clearfix"> 
              <div class="address-item address-item-new" data-type="" id="J_newAddress"> 
-              <i class="iconfont"></i> <a href="/add">添加新地址</a> 
+              <a href="/add"><i class="iconfont"></i></a> <a href="/add">添加新地址</a> 
              </div>
 
              @if(!empty($address))
@@ -31,7 +31,7 @@
                    </dl>
                    <input type="hidden" value="{{$val->id}}" id="inp">
                    <div class="actions">
-                    <a href="javascript:void(0)" data-id="1" class="modify J_addressModify">修改</a>
+                    <a href="/editaddress?id={{$val->id}}" data-id="1" class="modify J_addressModify">修改</a>
                     <a href="javascript:void(0)" class="modify J_addressDel del" >删除</a>
                    </div>
                   </div>
@@ -69,4 +69,5 @@
 
   });
 </script>
+
 @endsection

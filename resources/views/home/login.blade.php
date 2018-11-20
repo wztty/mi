@@ -52,6 +52,10 @@
                                 <h3 id="error">
                                     {{ session('error') }}
                                 </h3>
+                            @elseif(session('success'))
+                                <h3 id="error">
+                                    {{ session('success') }}
+                                </h3>
                             @endif
                         </div>
                         <div class="enter-area">
