@@ -84,7 +84,7 @@
 
                 <div class="payment-box ">
                     <div class="payment-header clearfix">
-                        <h3 class="title">支付平台</h3>
+                        <h3 class="title">选择支付平台</h3>
                         <span class="desc"></span>
                     </div>
                     <div class="payment-body">
@@ -94,7 +94,7 @@
                             </li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="alipay" value="alipay" />
-                                <a href="/order/pay"><img src="//c1.mifile.cn/f/i/15/pay/alipay-0718-1.png" alt="" style="margin-left: 0;"/>
+                                <a href="/pay?id={{$oid}}"><img src="//c1.mifile.cn/f/i/15/pay/alipay-0718-1.png" alt="" style="margin-left: 0;"/>
                             </li>
                             <li class="J_bank">
                                 <input type="radio" name="payOnlineBank" id="micash" value="micash" />
@@ -124,12 +124,5 @@ $(function(){
     })
 })
 </script> 
-
-<!-- 支付宝接口调用 -->
-<script>
-    $("#alipay").click(function(){
-        
-    });
-</script>
 
 @endsection

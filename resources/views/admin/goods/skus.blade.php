@@ -20,6 +20,7 @@
                     <th>状态</th>
                     <th>删除</th>
                     <th>修改</th>
+                    <th>添加</th>
                 </tr>
 
                 </thead>
@@ -32,12 +33,14 @@
                        <td>{{$val->color}}</td>
                        <td>{{$val->falsePrice}}</td>
                        <td>{{$val->price}}</td>
-                       <td><img src="{{$val->img}}" alt="" width="60"></td>
+                       <td><img src="{!!$val->img!!}" alt="" width="60"></td>
                        <td>{{$val->stock}}</td>
                        <td>{{$val->status}}</td>
-                       <td><a href="" class="btn btn-info">删除</a></td>
-                       <td><a href="" class="btn btn-info">修改</a></td>
+                       <td><a href="/adminskus?id={{$val->id}}" class="btn btn-info">删除</a></td>
+                       <td><a href="/adminskus/{{$val->id}}/edit" class="btn btn-info">修改</a></td>
+                       <td><a href="/skus/store?id={{$val->good_id}}" class="btn btn-info">添加</a></td>
                    </tr>
+
                 @endforeach
                 </tbody>
                 <div class="dataTables_paginate paging_full_numbers" id="pages">

@@ -1,4 +1,4 @@
-@extends('admin.public.index');
+@extends('admin.public.index')
 @section('title','添加分类')
 @section('content')
 <html>
@@ -9,7 +9,7 @@
     <span>添加分类</span> 
    </div> 
    <div class="mws-panel-body no-padding"> 
-    <form class="mws-form" action="{{url('/admincates')}}" method="post"  enctype="multipart/form-data"> 
+    <form class="mws-form" action="{{url('/admin/cates')}}" method="post"  enctype="multipart/form-data"> 
      <div class="mws-form-block"> 
       <div class="mws-form-row"> 
        <label class="mws-form-label">添加分类名称</label> 

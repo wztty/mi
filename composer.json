@@ -17,7 +17,8 @@
     "autoload": {
         "classmap": [
             "database",
-            "resources/org/code"
+            "resources/org/code",
+            "app/Library/Ucpass.php"
         ],
         "psr-4": {
             "App\\": "app/"

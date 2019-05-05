@@ -23,7 +23,7 @@
 
             </div>
             <div class="topbar-cart" id="J_miniCartTrigger">
-                <a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="/cart/"> <i class="iconfont">&#xe60c;</i>
+                <a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="/cart"> <i class="iconfont">&#xe60c;</i>
                     购物车
                     <span class="cart-mini-num J_cartNum"></span>
                 </a>
@@ -46,8 +46,8 @@
             ?>
             <div class="topbar-info" id="J_userInfo">
                 <span class="user">
-                    <a rel="nofollow" class="user-name" href="/user/comment" target="_blank">
-                        <span class="name">{{$user->username}}</span> <i class="iconfont"></i>
+                    <a rel="nofollow" class="user-name" href="/userdata" target="_blank">
+                        <span class="name">{{$user->nikename}}</span> <i class="iconfont"></i>
                     </a>
                     <ul class="user-menu" style="display: none;">
 

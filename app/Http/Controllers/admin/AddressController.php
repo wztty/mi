@@ -11,7 +11,7 @@ class AddressController extends Controller
     public function index(Request $request)
     {
     	$address=DB::table('addresses')->paginate(10);
-
+        //dd($address);
     	return view('admin.users.address',['address'=>$address,'request'=>$request->all()]);
     }
 

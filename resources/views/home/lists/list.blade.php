@@ -60,7 +60,7 @@
         <form name="compareForm" action="http://mm.com/compare.php" method="post" onsubmit="return compareGoods(this);">
             <div class="goods-list-box">
 
-
+            @if(!empty($goods))
                 {{--这里是需要遍历的单体--}}
                 @foreach($goods as $good)
                     
@@ -95,7 +95,9 @@
                 </div>
                 @endforeach
                 {{--这里是需要遍历的单体 结束--}}
-
+            @else
+            暂无数据
+            @endif
 
             </div>
         </form>

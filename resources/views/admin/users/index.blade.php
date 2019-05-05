@@ -46,12 +46,7 @@
                         @endif
                        </td>
                        <td>
-                         <form action="/adminuser/{{$val->id}}" method="post">
-                            {{csrf_field()}}
-                            {{method_field('DELETE')}}
-                            <button class="btn btn-info">删除</button>
-                            
-                         </form>
+                         <a href="javascript:void(0); " class="btn btn-info del">删除</a>
                        </td>
                        <td>
                          
@@ -68,4 +63,26 @@
                 </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script> 
+  <script>
+      $('.del').click(function(){
+        var id = $('this').parents('tr').find('td:first').html();
+        var s = $(this).parents();
+        confirm('确定要删除吗');
+        $.get('/userdel',{id:id},function(data){
+
+              if(data == 1){
+
+                
+                s.remove();
+              }else{
+
+                alert('系统繁忙,请稍后再试');
+              }
+        });
+      });
+  </script>
 @endsection

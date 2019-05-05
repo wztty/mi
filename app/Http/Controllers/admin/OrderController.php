@@ -11,51 +11,54 @@ class OrderController extends Controller
     public function index(Request $request)
     {
     	//查询所有订单
-    	$order = DB::table('orders')->where('pay_status','>',0)->paginate(10);
+    	$order = DB::table('orders')->where('order_status','>',0)->where('pay_status','>',0)->paginate(10);
 
     	return view('admin.orders.order',['order'=>$order,'request'=>$request->all()]);
     }
 
-    //修改
-    public function update(Request $request)
-    {
-    	$id = $request->input('id');
 
-    	$info = DB::table('orders')->where('id','=',$id)->first();
-
-    	return view('admin.orders.edit',['info'=>$info]);
-    }
 
     //处理修改
     public function doedit(Request $request)
     {
     	$id = $request->input('id');
 
-    	$data['order_status'] = $request->input('order_status');
+    	$data['order_status'] = 8;//表示发货等待收货
     	//获得订单详情
     	$info = DB::table('orders')->where('id','=',$id)->first();
 
     	$status = $info->order_status;
         //dd($status);
 
-        if($status == 0||$status == 2){
+        if($status == 1){ //表示已支付等待发货
 
             $row = DB::table('orders')->where('id','=',$id)->update($data);
 
             if($row){
 
-                return redirect('/admin/order')->with('success','修改成功');
+                echo 1;
 
             }else{
 
-                return redirect('/update/status')->with('success','修改失败');
+                echo 2;
             }
 
         }else{
 
-            return back()->with('error','修改失败已经发货或着客户没有收货');
+            echo 3;
         }
 
+    }
+
+
+    //后台订单详情
+    public function show(Request $request)
+    {
+        $oid = $request->input('id');
+
+        $goods = DB::table('order_goods')->where('order_id','=',$oid)->paginate(10);
+
+        return view('admin.orders.show',['goods'=>$goods,'request'=>$request->all()]);
     }
 
 }

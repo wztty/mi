@@ -23,18 +23,18 @@
                     </div>
                     <div class="mws-form-row" style="width: 490px;" >
                         <div class="mws-form-item">
-                            <img src="{{$goods->showImg}}" alt="">
+                            <img src="{!!$goods->img!!}" alt="">
                         </div>
                     </div><div class="mws-form-row" style="width: 490px;" >
                         <label class="mws-form-label">列表图片</label>
                         <div class="mws-form-item">
-                            <input type="file" class="small" title="" name="showimg">
+                            <input type="file" class="small" title="" name="showimg" value="{{$goods->showImg}}">
                         </div>
                     </div>
                     <div class="mws-form-row" style="width: 490px;" >
                         <label class="mws-form-label">商品主图</label>
                         <div class="mws-form-item">
-                            <input type="file" class="small" title="" name="img" multiple>
+                            <input type="file" class="small" title="" name="img" value="{{$goods->img}}" multiple>
                         </div>
                     </div>
 
@@ -54,7 +54,7 @@
                         <label class="mws-form-label">状态</label>
                         <div class="mws-form-item">
                             <input type="radio" title="" name="status" value="1" checked>上架
-                            <input type="radio" title="" name="status" va1ue="0">下架
+                            
                         </div>
                     </div>
 
@@ -83,9 +83,9 @@
                 </div>
                 <div class="mws-button-row">
                     {{csrf_field()}}
-                    {{ method_field('PUT') }}
+                    {{method_field('PUT')}}
                     <input type="hidden" name="id" value="{{$goods->id}}">
-                    <input type="submit" value="保存并添加sku" class="btn btn-warning">
+                    <input type="submit" value="修改" class="btn btn-warning">
                 </div>
             </form>
         </div>

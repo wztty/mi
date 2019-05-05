@@ -2,6 +2,15 @@
 <!-- saved from url=(0035)http://mm.com/user.php?act=register -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+ <style type="text/css">
+  .cur{
+    border:1px solid red;
+  }
+
+  .curs{
+    border:1px solid green;
+  }
+  </style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="Generator" content="ECSHOP v2.7.3" />
     <meta name="Keywords" content="" />
@@ -19,6 +28,7 @@
 <body>
 
 <script type="text/javascript" src="/static/homes/common/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="/static/homes/common/js/jquery.json.js"></script>
 <script type="text/javascript" src="/static/homes/common/js/transport_jquery.js"></script>
 <script type="text/javascript" src="/static/homes/common/js/utils.js"></script>
@@ -49,7 +59,7 @@
         });
         //注册界面
         $(".inputbg input").focus(function(){
-            $('#error').remove();
+            
 
             if($(this).val().length>0){
                 $(this).parent().siblings(".t_text").addClass("hide");
@@ -118,15 +128,29 @@
                         <div class="err_tip" id="username_notice">
                             <em></em>
                         </div>
-                        <input type="hidden" id="sendtype" />
                         <div class="inputbg">
-                            <label class="labelbox"> <input type="text" name="phone" id="phone" placeholder="手机号码" value="{{old('phone')}}"/> </label>
+                            <input type="text" value="" name="phone" class="labelbox" style="height:35px;width:200px" placeholder="&nbsp;手机号码" value="{{old('phone')}}"/><span></span>
+                            <button style="width:120px;margin-left: 0px;margin-right: 0px;" type="button" class="btn btn332 btn_reg_1" id="btn">发送验证码</button>
+                                
+                                
+
                             <span class="t_text">手机号码</span>
                             <span class="error_icon">{{$errors->first('phone')}}</span>
                         </div>
                         <div class="err_tip" id="username_notice">
                             <em></em>
                         </div>
+
+                        <div class="inputbg">
+                            <input  type="text" name="codes" id="codes" class="labelbox" style="height:35px;width:200px" placeholder="输入验证码" value="{{old('codes')}}"/><span></span>
+                            <span class="t_text">验证码</span>
+                            <span class="error_icon">{{$errors->first('codes')}}</span>
+                        </div>
+                        <div class="err_tip" id="username_notice">
+                            <em></em>
+                        </div>
+
+
                         <div class="inputbg">
                             <label class="labelbox"> <input name="email" type="text" id="email"placeholder="email" value="{{old('email')}}"/> </label>
                             <span class="t_text">email</span>
@@ -168,7 +192,7 @@
                         </div>
                         <div class="fixed_bot mar_phone_dis1">
                             {{csrf_field()}}
-                            <input type="submit" value="同意协议并注册" class="btn332 btn_reg_1 submit-step" />
+                            <input id="ty" type="submit" value="同意协议并注册" class="btn332 btn_reg_1 submit-step" />
                         </div>
                         <div class="trig">
                             已有账号?
@@ -194,6 +218,7 @@
     var password_shorter = "登录密码不能少于 6 个字符。";
     var confirm_password_invalid = "两次输入密码不一致";
     var email_empty = "Email 为空";
+    var codes_empty = "验证码不能为空";
     var email_invalid = "Email 不是合法的地址";
     var agreement = "您没有接受协议";
     var msn_invalid = "msn地址不是一个有效的邮件地址";
@@ -213,6 +238,120 @@
     var no_select_question = "您没有完成密码提示问题的操作";
     var passwd_balnk = "- 密码中不能包含空格";
     var username_exist = "用户名 %s 已经存在";
+</script>
+<script type="text/javascript">
+
+ // alert($);
+ //获取焦点
+ $("input").focus(function(){
+  //获取reminder属性值
+  reminder=$(this).attr("reminder");
+  $(this).next("span").css('color',"red").html(reminder);
+  //样式清除
+  $(this).removeClass("curs");
+  //添加样式
+  $(this).addClass('cur');
+ });
+
+ //手机号校验
+ $("input[name='phone']").blur(function(){
+  o=$(this);
+  //获取手机号
+  p=$(this).val();
+  //匹配
+  if(p.match(/^\d{11}$/)==null){
+    // alert("手机号不合法");
+    $(this).next("span").css('color',"red").html("手机号码不正确");
+    o.next("span").next("button").html("发送验证码");
+    $(this).addClass('cur');
+     o.next("span").next("button").attr("disabled",true);
+    
+  }else{
+    // alert('ok');
+    //Ajax 校验手机号码是否重复
+    $.get("/xurl",{p:p},function(data){
+      // alert(data);
+      if(data==1){
+        o.next("span").next("button").html("手机号已被注册");
+        
+        //把a标签禁用
+       o.next("span").next("button").attr("disabled",true);
+        
+      }else{
+        o.next("span").next("button").html("发送验证码");
+        o.next("span").html("√").css('color',"green");
+        
+      }
+    });
+  }
+ });
+
+ //获取校验码
+ $("#btn").click(function(){
+  a=$(this);
+  //获取手机号
+  pp=$("input[name='phone']").val();
+
+  //Ajax
+  $.get("/codeget",{pp:pp},function(data){
+     //alert(data.code);
+    if(data.code==000000){
+      //执行倒计时
+      m=60;
+      mytime=setInterval(function(){
+        m--;
+        //赋值
+        $("#btn").html(m+"秒后重新发送");
+        //按钮禁用
+         $("#btn").attr("disabled",true);
+        if(m==0){
+          //清除定时器
+          clearInterval(mytime);
+          $("#btn").html("重新发送");
+          //按钮激活
+          $("#btn").attr("disabled",false);
+        }
+      },1000);
+    }
+  },'json');
+ });
+
+ //输入校验码检测
+ $("input[name='codes']").blur(function(){
+  i=$(this);
+  //获取输入的校验码
+  codes=$(this).val();
+  //Ajax
+  $.get("/checkcode",{codes:codes},function(data){
+    // alert(data);
+    if(data==1){
+      i.next("span").css("color",'green').html('√');
+      i.addClass("curs");
+        
+    }else if(data==2){
+       i.next("span").css("color",'red').html('×验证码不正确');
+      i.addClass("cur");
+      
+    }else if(data==3){
+       i.next("span").css("color",'red').html('×验证码为空');
+      i.addClass("cur");
+      
+    }else{
+       i.next("span").css("color",'red').html('×验证码过期');
+      i.addClass("cur");
+      
+    }
+  });
+ });
+
+$('#ty').click(function(){
+    if($('#codes').val()==''){
+        $('#ty').attr("disabled",true);
+    }else{
+
+    }
+})
+
 </script>
 </body>
 </html>

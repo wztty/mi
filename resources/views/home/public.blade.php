@@ -26,8 +26,8 @@
         </div> 
         <div class="box-bd"> 
          <ul class="uc-nav-list"> 
-          <li> <a href="/userorder">我的订单</a> </li> 
-          <li> <a href="/usercomment">评价晒单</a> </li> 
+          <li> <a href="/user/order">我的订单</a> </li> 
+          <li> <a href="/user/comment">评价晒单</a> </li> 
          </ul> 
         </div> 
        </div> 

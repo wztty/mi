@@ -1,5 +1,5 @@
-@extends('admin.public.index');
-@section('title','后台分类列表');
+@extends('admin.public.index')
+@section('title','后台分类列表')
 @section('content')
 	<html>
  <head></head>
@@ -34,13 +34,13 @@
         <td class=" ">{{$val->name}}</td> 
 
         <td class=" ">
-          <form action="/admincates/{{$val->id}}" method="post">
+          <form action="/admin/cates/{{$val->id}}" method="post">
           {{csrf_field()}}
           {{method_field("DELETE")}}
           <button type="submit" class="btn btn-info">删除</button>
         </form>
         </td>
-        <td class=" "><a href="/admincates/{{$val->id}}" class="btn btn-info">修改</a></td> 
+        <td class=" "><a href="/admin/cates/{{$val->id}}" class="btn btn-info">修改</a></td> 
        </tr>
      @endforeach
       </tbody>

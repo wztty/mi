@@ -25,12 +25,8 @@
                 <tbody>
                 @foreach($address as $val)
                    <tr style="text-align:center;cursor:pointer;">
-                      <td>{{$val->id}}</td>
-                    <td>
-                      <?php 
-                          echo   $user=\App\Http\Controllers\admin\UserController::lookcate($val->user_id);
-                        ?> 
-                    </td>
+                      <td>{{$val->id}}</td>                  
+                      <td>  <?php  echo $user = \App\Http\Controllers\admin\UserController::lookcate($val->user_id);?></td>
                       <td>{{$val->consignee}}</td>
                       <td>{{$val->tel}}</td>
                       <td>{{$val->province}}</td>

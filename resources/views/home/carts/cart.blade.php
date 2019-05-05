@@ -68,7 +68,7 @@
             <h2>您的购物车还是空的！</h2>
             <p class="login-desc">登录后将显示您之前加入的商品</p>
             <a href="#" class="btn btn-primary btn-login" id="J_loginBtn">立即登录</a>
-            <a href="//list.mi.com/0" class="btn btn-primary btn-shoping J_goShoping" >马上去购物</a>
+            <a href="/" >马上去购物</a>
         </div>
         @endif
         @if(!empty($carts[0]))

@@ -46,13 +46,13 @@
             ?>
             <div class="topbar-info" id="J_userInfo">
                 <span class="user">
-                    <a rel="nofollow" class="user-name" href="/user/comment" target="_blank">
-                        <span class="name">{{$user->username}}</span> <i class="iconfont"></i>
+                    <a rel="nofollow" class="user-name" href="/userdata" target="_blank">
+                        <span class="name">{{$user->nikename}}</span> <i class="iconfont"></i>
                     </a>
                     <ul class="user-menu" style="display: none;">
 
                         <li>
-                            <a rel="nofollow" href="/usercomment" target="_blank">评价晒单</a>
+                            <a rel="nofollow" href="/user/comment" target="_blank">评价晒单</a>
                         </li>
                         <!-- <li>
                             <a rel="nofollow" href="http://order.mi.com/user/favorite" target="_blank">我的喜欢</a>
@@ -63,7 +63,7 @@
                     </ul>
                 </span>
                 <span class="sep">|</span>
-                <a rel="nofollow" class="link link-order" href="/userorder" target="_blank">我的订单</a>
+                <a rel="nofollow" class="link link-order" href="/user/order" target="_blank">我的订单</a>
             </div>
             <?php } ?>
         </div>
@@ -130,6 +130,8 @@
     </div>
 @show
 @section('content')
+
+
 
 @show
     <div class="site-footer">

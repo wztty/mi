@@ -31,8 +31,8 @@
                          用过审核
                         @endif
                        </td>
-                       <td><a href="/dolink/?id={{$val->id}}" class="btn btn-info">通过审核</a></td>
-                       <td><a href="/del/?id={{$val->id}}" class="btn btn-info">删除</a></td>
+                       <td><a href="javascript:void(0);" class="btn btn-info change">通过审核</a></td>
+                       <td><a href="javascript:void(0);" class="btn btn-info del">删除</a></td>
                    </tr>
                 @endforeach
                 </tbody>
@@ -43,4 +43,46 @@
                 </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script> 
+<script>
+  $('.change').click(function(){
+    var id = $(this).parents('tr').find('td:first').html();
+    var s = $(this).parent().prev();
+    //alert(id);
+    $.get('/dolink',{id:id},function(data){
+
+        if(data == 1){
+          s.html('用过审核');
+          alert('用过审核');
+        }else if(data == 2)
+        {
+          alert('系统繁忙');
+        }else{
+          alert('网站已经审核过了');
+        }
+    });
+  });
+</script>
+
+<!-- ajax删除 -->
+<script>
+    $('.del').click(function(){
+
+      var id = $(this).parents('tr').find('td:first').html();
+      var p = $(this).parents('tr');
+
+      $.get('/del',{id:id},function(data){
+
+        if(data == 1){
+          p.remove();
+          alert('删除成功');
+        }else{
+          alert('删除失败');
+        }
+      });
+    });
+</script>
 @endsection

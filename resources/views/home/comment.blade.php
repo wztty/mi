@@ -6,15 +6,15 @@
     <title>回帖</title>
     <meta name="viewport" content="width=1226">
 
-    <link type="text/css" rel="stylesheet" href="/homes/common/demo/css/application.css">
-    <script type="text/javascript" src="/homes/common/demo/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/homes/common/lib/jquery.raty.min.js"></script>
-    <link href="/homes/common//favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link type="text/css" rel="stylesheet" href="/static/homes/common/demo/css/application.css">
+    <script type="text/javascript" src="/static/homes/common/demo/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/homes/common/lib/jquery.raty.min.js"></script>
+    <link href="/static/homes/common//favicon.ico" rel="shortcut icon" type="image/x-icon">
 
     <link rel="shortcut icon" href="http://s01.mifile.cn/favicon.ico" type="image/x-icon">
     <link rel="icon" href="http://s01.mifile.cn/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/homes/common/css/base.min.css">
-    <link rel="stylesheet" type="text/css" href="/homes/common/css/checkout.min.css">
+    <link rel="stylesheet" href="/static/homes/common/css/base.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/homes/common/css/checkout.min.css">
     <style type="text/css" media="screen">
         body{
             font-family: Tahoma;
@@ -62,7 +62,7 @@
             <h3 class="title">亲,留个评价吧!</h3>
         </div>
         <div>
-            <h2 class="title"><a href="" >{{$sku->title}}</a></h2>
+            <h2 class="title"><a href="/detail?id={{$sku->id}}" >{{$sku->title}}</a></h2>
             <div class="demo">
                 <div id="precision-demo" class="target-demo"></div>
                 <div id="precision-hint" class="hint"></div>
@@ -71,7 +71,7 @@
         <div class="clear"></div>
         <div class="section-body clearfix">
             <div class="goods-item">
-                <div class="figure figure-img"><a href="//item.mi.com/1152000033.html?cfrom=list" data-stat-id="06967af09ddae9f3" >
+                <div class="figure figure-img"><a href="/detail?id={{$sku->id}}" >
                     <img src="{{$sku->img}}" width="200" height="200" alt=""></a>
                 </div>
             </div>
@@ -88,7 +88,7 @@
             </ul>
         </div>
     </div>
-    <input type="hidden" name="good_id" value="{{$sku->good->id}}">
+    <input type="hidden" name="good_id" value="{{$gid}}">
     {{csrf_field()}}
     <div class="section-bar clearfix">
         <div class="fr">
@@ -105,10 +105,10 @@
 
 
 
-        $.fn.raty.defaults.path = '/homes/common/lib/img';
+        $.fn.raty.defaults.path = '/static/homes/common/lib/img';
 
         $('#precision-demo').raty({
-            path      : '/homes/common/demo/img',
+            path      : '/static/homes/common/demo/img',
             cancelOff : 'cancel-off-big.png',
             cancelOn  : 'cancel-on-big.png',
             size      : 24,

@@ -31,39 +31,7 @@ class ListController extends Controller
     	return view('home.lists.list',['goods'=>$goods]);
     }
 
-    //商品详情页
-    // public function detail()
-    // {
-    // 	//获得商品分类id
-    // 	$cate_id=$_GET['id'];
-    // 	//根据$cate_id查询商品
-    // 	$good=DB::table('goods')->where('cate_id','=',$cate_id)->first();
-    // 	//dd($good);
-    // 	$good_id=$good->id;
-    // 	//根据goods_id查询sku表信息
-    // 	$skus=DB::table('skus')->where('good_id','=',$good_id)->get();
-    // 	//dd($skus);
-    // 	return view('home.lists.detail',['good'=>$good,'skus'=>$skus]);
-    // }
-     public static function getpid($pid)
-    {
-        $res=DB::table('comments')->where('pid','=',$pid)->get();
-        $data=[];
-        //遍历得到数据把子类赋值给suv字段
-       foreach($res as $key=>$value){
-            $value->suv=self::getpid($value->id);
-            $data[]=$value;
-        }
-        return $data;
-    }
 
-    public static function cate()
-    {
-        $cate=self::getpid(0);
-        //dd($cate);
-        
-        return $cate;
-    }
 
     // 获取用户信息
     public static function getuser($uid)
@@ -76,9 +44,11 @@ class ListController extends Controller
 
     public function detail(Request $request)
     {
-//        dd($request->only('id'));
+       //dd($request->only('id'));
         //查询的到商品
         $good = Good::find($request->only('id')['id']);
+        //dd($good);
+       //$gid = $good->id;
 
         if(!$good){
             echo '<script>alert("暂无数据");window.location.href="/";</script>';
@@ -118,14 +88,60 @@ class ListController extends Controller
         //dd($good->attr);
         $good->info = $info;
         //得到skuid
-        $skuid=$good->skus()->where('attr',$attr)->first()->id;
+        $skuid = $good->skus()->where('attr',$attr)->first()->id;
        //dd($good->info);
         //获取所有评论
-        $comments=DB::table('comments')->where('pid','=',0)->get();
+        $comments = DB::table('comments')->where('good_id','=',$good->id)->get();
         //dd($comments);
         //最新评论
-        $newcommend=DB::table('comments')->orderBy('created_at','desc')->take('2')->get();
+        $newcommend = DB::table('comments')->orderBy('created_at','desc')->take('2')->get();
         //dd($newcommend);
         return view('home.lists.detail',['good'=>$good,'title'=>'详情','comments'=>$comments,'newcommend'=>$newcommend,'skuid'=>$skuid]);
+    }
+
+    //商品查询
+    public function List_Search(Request $request)
+    {
+        $data = $request->all();
+
+//        dd($data['kWord']);
+
+//        /**测试**/ $data['kWord'] = '手机'; /**结束**/
+
+        $cates = Cate::where('pid',0)->get();
+
+
+        $cate = Cate::where('name','like','%'.$data['kWord'].'%')->get();
+
+
+//        dd($cate);
+
+        $pid = [];
+
+        foreach ($cate as $key => $value) {
+            $pid[] = $value->id;
+        }
+
+
+
+        $cate = Cate::whereIn('pid',$pid)->get();
+
+
+        if($cate->count()) {
+            $id = [];
+            foreach ($cate as $key => $value) {
+                $id[] = $value->id;
+            }
+            $search_goods = Good::whereIn('cate_id',$id )->Get();
+
+        }else{
+            $search_goods = Good::whereIn('cate_id', $pid)->Get();
+        }
+
+
+
+        $goods = Good::take('10')->orderBy('created_at','desc')->get();
+
+        return view('home.list_search',['cates'=>$cates,'search_goods'=>$search_goods,'goods'=>$goods,'title'=>'小米商城']);
     }
 }

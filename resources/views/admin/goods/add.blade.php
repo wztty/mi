@@ -14,13 +14,7 @@
                         <label class="mws-form-label">商品名称</label>
                         <div class="mws-form-item">
                             <input type="text" class="small" title="" name="title" value="{{old('title')}}">
-                            <!-- <input type="hidden" name="sub_title" value=""> -->
-                        </div>
-                    </div>
-                    <div class="mws-form-row">
-                        <label class="mws-form-label">商品关键词</label>
-                        <div class="mws-form-item">
-                            <input type="text" class="small" title="" name="sub_title" value="{{old('sub_title')}}">
+                            <input type="hidden" name="cate_id" value="$cates->cate_id">
                         </div>
                     </div>
                     <div class="mws-form-row" style="width: 490px;" >
@@ -56,7 +50,7 @@
                         <label class="mws-form-label">状态</label>
                         <div class="mws-form-item">
                             <input type="radio" title="" name="status" value="1" checked>上架
-                            <input type="radio" title="" name="status" va1ue="0">下架
+                            
                         </div>
                     </div>
 

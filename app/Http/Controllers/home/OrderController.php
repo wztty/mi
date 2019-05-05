@@ -102,9 +102,9 @@ class OrderController extends Controller
     {
     	//dd($request->all());
         $uid = session('uid');
-        //$listItem = session('listItem');
+        $listItem = session('listItem');
         //测试数据
-        $listItem = array(6,8);
+        //$listItem = array(6,8);
         //获取购物车信息
         $carts = Cart::where('user_id',$uid)->whereIn('sku_id',$listItem)->get();
 
@@ -141,6 +141,8 @@ class OrderController extends Controller
             echo json_encode($this->data);die;
             \DB::rollBack();
         }
+
+        //dd($carts);
         //将商品信息插入到数据库中
         foreach($carts as $k=>$v){
             
@@ -162,7 +164,7 @@ class OrderController extends Controller
                 $v->delete();
             }
         }
-
+        //dd($orderGoods);
         //清除session存储的订单sku id信息
         session(['listItem'=>null]);
         $this->data['status'] = 0;
@@ -177,7 +179,8 @@ class OrderController extends Controller
     {
         //查询订单数据库
         $order = Order::where('order_status',0)->findOrFail($request->input('id'));
-        //dd($order);
+        //dd($order->id);
+        $oid = $order->id;
         //查询
         //创建时间
         $beginTime = strtotime($order->created_at);
@@ -194,16 +197,26 @@ class OrderController extends Controller
         return view('home.order.pay',[
                 'order'=>$order,
                 'countTime'=>$countTime,
+                'oid'=>$oid,
             ]);
     }
 
      /**
      * 发起支付请求
      */
-    public function getPayfor(Request $request)
+   
+    public function pay(Request $request)
     {
-
-        
+        //获得订单id
+        $oid = $request->input('id');
+        //获取订单信息
+        $info = DB::table('orders')->where('id','=',$oid)->first();
+        //获取参数
+        $order_num = $info->order_num;
+        $order_title = '小米手机';
+        $total = 0.01;
+        $body = '小米手机为发烧而生';
+        pay($order_num,$order_title,$total,$body);
     }
 
     /**
@@ -211,23 +224,30 @@ class OrderController extends Controller
      */
     public function changeStatus(Request $request)
     {
-        //做验证
-        //获取参数
-        $status = $request->input('status');
-        $orderid = $request->input('order_id');
-        if($status=='00'){
-            //获取验证信息
-            $order = Order::where('order_status',0)->findOrFail($orderid);
+        
+        //获取订单号
+        $order_num = $request->input('out_trade_no');
+        // 1 -- 代表支付成功
+        $status['pay_status'] = 1;
+        $status['order_status'] = 1;
+        //改变订单状态
+        $info = DB::table('orders')->where('order_num','=',$order_num)->update($status);
 
-            $order->order_status = 1;
-            $order->pay_status = 1;
+        if($info){
 
-            if($order->save()){
-                session(['order'=>null]);
-                return view('home.order.success');
-            }
+            return view('home.order.success'); 
+        }else{
+
+            echo '系统繁忙';
         }
-
+        
+                
+      
+        
     }
+
+   
+
+   
    
 }

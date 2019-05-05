@@ -1,4 +1,4 @@
-@extends('admin.public.index');
+@extends('admin.public.index')
 @section('title','添加分类')
 @section('content')
 <html>

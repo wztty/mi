@@ -80,7 +80,7 @@
                     <div class="ng-foot clearfix">
                         <div class="ng-cookie-area"><label><input type="checkbox" value="1" name="remember" id="remember" class="remember-me">十天免登陆。</label></div>
                         <div class="ng-link-area">
-                            <span><a href="#">忘记密码?</a></span>
+                            <span><a href="/pas">忘记密码?</a></span>
                             <div class="third-area hide">
                                 <a class="ta-weibo" target="_blank" href="http://mm.com/user.php?act=oath&amp;type=weibo" title="weibo">weibo</a>
                                 <a class="ta-qq" target="_blank" href="http://mm.com/user.php?act=oath&amp;type=qq" title="qq">qq</a>

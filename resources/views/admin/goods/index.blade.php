@@ -31,7 +31,7 @@
                         ?> 
                        </td>
                        <td>{{$val->price}}</td>
-                       <td><img src="{{$val->showImg}}" alt="" width="60"></td>
+                       <td><img src="{!!$val->img!!}" alt="" width="60"></td>
                        <td>{{$val->status}}</td>
                        <td><form action="/admingoods/{{$val->id}}" method="post">
             {{csrf_field()}}

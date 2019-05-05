@@ -283,9 +283,6 @@
 
                         <ul class="comment-box-list" id="J_supComment">
 
-                        <?php
-                             $comments = \App\Http\Controllers\home\ListController::cate();
-                        ?>
 
                             @foreach($comments as $k=>$comment)
                             <!--******评价********-->
@@ -306,12 +303,6 @@
                                 <dl class="user-comment">
                                     <dt class="user-comment-content J_commentContent">
                                     <p class="content-detail"> <a href="http://order.mi.com/comment/commentDetail/comment_id/134117576" target="_blank"> {{$comment->content}} </a> </p>
-                                    @if($comment->pid > 0)
-                                    <h4>回复信息：</h4>
-                                    @foreach($comment->suv as $val)
-                                     <p class="content-detail"> {{$val->content}} </p>
-                                     @endforeach
-                                    @endif
                                     </dt>
                                     {{--<dd class="user-comment-self-input">--}}
                                         {{--<div class="input-block">--}}
@@ -339,7 +330,7 @@
                             <li class="purple timelineunit J_commentContent" data-id="135575831"> <p class="line-content"> <a href="http://order.mi.com/comment/commentDetail/comment_id/135575831" target="_blank">{{$comment->content}}</a> </p>
                                 <div class="line-foot">
                                     <div class="line-left">
-                                        来自于 <?php echo  $pic= url(\App\Http\Controllers\home\ListController::getuser($comment->user_id)->username) ?>
+                                        来自于 <?php echo  $pic= \App\Http\Controllers\home\ListController::getuser($comment->user_id)->nikename ?> &nbsp;&nbsp;&nbsp;&nbsp;{{$comment->created_at}}
                                     </div>
 
                                 </div>

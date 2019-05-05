@@ -24,31 +24,43 @@ class IndexController extends Controller
 
     }
     //友情链接审核
-    public function dolink()
+    public function dolink(Request $request)
     {
-    	$id=$_GET['id'];
-    	$data=DB::table('links')->where('id','=',$id)->update(['status'=>1]);
-    	if($data){
+    	$id = $request->input('id');
 
-    		return redirect('/flink')->with('success','通过审核');
+    	$data = DB::table('links')->where('id','=',$id)->first()->status;
+
+    	if($data == 0){
+
+            if(DB::table('links')->where('id','=',$id)->update(['status'=>1])){
+
+                echo 1;
+
+            }else{
+
+                echo 2;
+            }
+
     	}else{
 
-    		return redirect('/flink')->with('success','审核失败');	
+    		echo 3;	
 		}
     }
 
     //友情链接删除
-    public function del()
+    public function del(Request $request)
     {
-    	$id=$_GET['id'];
+    	$id = $request->input('id');
+        
     	$del=DB::table('links')->where('id','=',$id)->delete();
 
     	if($del){
 
-    		return redirect('/flink')->with('success','删除成功');
+    		echo 1;
     	}else{
 
-    		return redirect('/flink')->with('success','修删除失败');	
+    		
+            echo 2;
 		}
     }
    
