@@ -80,6 +80,34 @@
                             <span class="text">全部商品分类</span>
                         </a>
                         <!-- 分类导航 start -->
+                            <div class="site-category"> 
+           <ul id="J_categoryList" class="site-category-list clearfix">
+            <?php
+                    $cates = \App\Http\Controllers\home\IndexController::cate();
+            ?>
+         @foreach($cates as $key=>$val)
+  <li class="category-item"><a class="title" href="/list?id={{$val->id}}">{{$val->name}}<i class="iconfont"></i></a>
+   <div class="children clea    rfix children-col-2" style="width:530px;">
+    <ul class="children-list children-list-col children-col-1">
+        @foreach($val->suv as $keys=>$vals)
+        @if($keys<6)
+            <li class="star-goods"><a class="link" href="/detail?id={{$vals->id}}"><img class="thumb" src="{{url($vals->img)}}" width="40" height="40" alt="" /><span class="text">{{$vals->name}}</span></a></li>
+        @endif
+        @endforeach
+    </ul>
+    <ul class="children-list children-list-col children-col-1">
+     @foreach($val->suv as $keyss=>$valss)
+        @if($keyss>5)
+     <li class="star-goods"><a class="link" href="/detail?id={{$valss->id}}"><img class="thumb" src="{{url($valss->img)}}" width="40" height="40" alt="" /><span class="text">{{$valss->name}}</span></a></li>
+        @endif
+    @endforeach
+    </ul>
+   </div></li>
+       @endforeach
+          
+           </ul>
+          </div>
+
                     </li>
 
                 </ul>

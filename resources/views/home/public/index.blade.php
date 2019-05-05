@@ -131,8 +131,6 @@
 @show
 @section('content')
 
-
-
 @show
     <div class="site-footer">
         <div class="container">
